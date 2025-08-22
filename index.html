@@ -17,6 +17,7 @@
             --card-hover: #F8FAF9;
             --success: #5A7F6E;
             --warning: #E2B684;
+            --danger: #E74C3C;
             --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             --radius: 16px;
         }
@@ -243,6 +244,7 @@
             overflow: hidden;
             transition: all 0.3s;
             box-shadow: var(--shadow);
+            position: relative;
         }
         
         .menu-item:hover {
@@ -316,6 +318,27 @@
             color: var(--warning);
         }
         
+        .item-tag.signature {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--danger);
+        }
+        
+        .stock-info {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 8px;
+        }
+        
+        .low-stock {
+            color: var(--warning);
+            font-weight: 600;
+        }
+        
+        .out-of-stock {
+            color: var(--danger);
+            font-weight: 600;
+        }
+        
         .bell-btn {
             background: linear-gradient(135deg, var(--primary) 0%, var(--darker) 100%);
             border: none;
@@ -334,6 +357,12 @@
         .bell-btn:hover {
             transform: scale(1.1) rotate(12deg);
             box-shadow: 0 0 15px rgba(90, 127, 110, 0.4);
+        }
+        
+        .bell-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
         }
         
         .cart-container {
@@ -424,6 +453,16 @@
             color: white;
         }
         
+        .quantity-btn:disabled {
+            border-color: #ccc;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .quantity-btn:disabled:hover {
+            background-color: transparent;
+        }
+        
         .cart-summary {
             border-top: 1px solid #eee;
             padding-top: 16px;
@@ -460,6 +499,13 @@
         .checkout-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(90, 127, 110, 0.4);
+        }
+        
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         
         .empty-cart {
@@ -504,6 +550,7 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: all 0.3s;
+            position: relative;
         }
         
         .featured-item:hover {
@@ -666,6 +713,10 @@
             opacity: 1;
         }
         
+        .notification.error {
+            background: linear-gradient(135deg, var(--danger) 0%, #c0392b 100%);
+        }
+        
         .overlay {
             position: fixed;
             top: 0;
@@ -768,36 +819,8 @@
         <section class="menu-section">
             <div class="featured-section">
                 <h2 class="section-title">Today's Specials</h2>
-                <div class="featured-items">
-                    <div class="featured-item">
-                        <div style="position: relative;">
-                            <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Peking Duck" class="featured-image">
-                            <div class="featured-badge">Chef's Recommendation</div>
-                        </div>
-                        <div class="featured-content">
-                            <div class="featured-header">
-                                <h3 class="featured-title">Peking Duck</h3>
-                                <div class="featured-price">¥98</div>
-                            </div>
-                            <p class="featured-desc">Crispy duck served with thin pancakes, spring onions, cucumber and hoisin sauce.</p>
-                            <button class="bell-btn" data-id="1">🛎️</button>
-                        </div>
-                    </div>
-                    
-                    <div class="featured-item">
-                        <div style="position: relative;">
-                            <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Dim Sum Platter" class="featured-image">
-                            <div class="featured-badge">Popular</div>
-                        </div>
-                        <div class="featured-content">
-                            <div class="featured-header">
-                                <h3 class="featured-title">Dim Sum Platter</h3>
-                                <div class="featured-price">¥68</div>
-                            </div>
-                            <p class="featured-desc">Assortment of steamed and fried dim sum including har gow, siu mai, and char siu bao.</p>
-                            <button class="bell-btn" data-id="2">🛎️</button>
-                        </div>
-                    </div>
+                <div class="featured-items" id="featuredItems">
+                    <!-- Featured items will be dynamically generated -->
                 </div>
             </div>
             
@@ -819,7 +842,9 @@
                 <button class="category-btn" data-category="drinks">Drinks</button>
             </div>
             
-            <div class="menu-items" id="menuItems"></div>
+            <div class="menu-items" id="menuItems">
+                <!-- Menu items will be dynamically generated -->
+            </div>
         </section>
         
         <aside class="cart-container" id="cartContainer">
@@ -877,7 +902,8 @@
     </div>
     
     <script>
-        const menuItems = [
+        // Default menu items (used only if no menu items are found in localStorage)
+        const defaultMenuItems = [
             {
                 id: 1,
                 name: "Peking Duck",
@@ -886,6 +912,7 @@
                 description: "Crispy duck served with thin pancakes, spring onions, cucumber and hoisin sauce.",
                 image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
                 tags: ["signature", "spicy"],
+                stock: 12,
                 isFeatured: true
             },
             {
@@ -896,6 +923,7 @@
                 description: "Assortment of steamed and fried dim sum including har gow, siu mai, and char siu bao.",
                 image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
                 tags: ["chef's pick", "veg"],
+                stock: 8,
                 isFeatured: true
             },
             {
@@ -905,7 +933,8 @@
                 category: "main",
                 description: "Stir-fried chicken with peanuts, vegetables, and chili peppers in a savory sauce.",
                 image: "https://images.unsplash.com/photo-1516714435131-44d6b64dc6f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["spicy"]
+                tags: ["spicy"],
+                stock: 5
             },
             {
                 id: 4,
@@ -914,7 +943,8 @@
                 category: "appetizers",
                 description: "A spicy and tangy soup with tofu, mushrooms, and bamboo shoots.",
                 image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["spicy", "veg"]
+                tags: ["spicy", "veg"],
+                stock: 15
             },
             {
                 id: 5,
@@ -923,7 +953,8 @@
                 category: "main",
                 description: "Soft tofu in a spicy sauce with minced meat and Sichuan peppercorns.",
                 image: "https://images.unsplash.com/photo-1630918037678-a8f7e0fbf90b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["spicy", "signature"]
+                tags: ["spicy", "signature"],
+                stock: 7
             },
             {
                 id: 6,
@@ -932,7 +963,8 @@
                 category: "appetizers",
                 description: "Crispy rolls filled with vegetables and served with sweet chili sauce.",
                 image: "https://images.unsplash.com/photo-1526318896980-cf78c088247c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["veg"]
+                tags: ["veg"],
+                stock: 20
             },
             {
                 id: 7,
@@ -941,7 +973,8 @@
                 category: "desserts",
                 description: "Warm chocolate cake with a molten center, served with vanilla ice cream.",
                 image: "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["signature"]
+                tags: ["signature"],
+                stock: 10
             },
             {
                 id: 8,
@@ -950,16 +983,20 @@
                 category: "drinks",
                 description: "Premium jasmine tea brewed to perfection.",
                 image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["veg"]
+                tags: ["veg"],
+                stock: 50
             }
         ];
 
+        // Cart array to store items
         let cart = [];
         const TAX_RATE = 0.1;
         const SERVICE_FEE = 15;
         const TABLE_ID = "table-12";
 
+        // DOM Elements
         const menuItemsContainer = document.getElementById('menuItems');
+        const featuredItemsContainer = document.getElementById('featuredItems');
         const cartItemsContainer = document.getElementById('cartItems');
         const subtotalElement = document.getElementById('subtotal');
         const taxElement = document.getElementById('tax');
@@ -978,14 +1015,50 @@
         const overlay = document.getElementById('overlay');
         const cartCount = document.querySelector('.cart-count');
 
+        // Initialize the page
         function init() {
+            // Load cart from localStorage for this table
             loadCart();
-            renderMenuItems();
-            updateCart();
+            
+            // Load menu items from admin panel
+            loadMenuItems();
+            
+            // Set up event listeners
             setupEventListeners();
+            
+            // Set up periodic cart synchronization
             setInterval(syncCart, 2000);
+            
+            // Listen for changes to menu items from admin
+            window.addEventListener('storage', handleStorageChange);
         }
 
+        // Load menu items from localStorage (set by admin)
+        function loadMenuItems() {
+            let menuItems = JSON.parse(localStorage.getItem('restaurant-menu'));
+            
+            // If no menu items found, use default items and save them
+            if (!menuItems || menuItems.length === 0) {
+                menuItems = defaultMenuItems;
+                localStorage.setItem('restaurant-menu', JSON.stringify(menuItems));
+            }
+            
+            renderMenuItems(menuItems);
+            renderFeaturedItems(menuItems);
+        }
+
+        // Handle storage changes (when admin updates menu)
+        function handleStorageChange(e) {
+            if (e.key === 'restaurant-menu') {
+                const menuItems = JSON.parse(e.newValue);
+                renderMenuItems(menuItems);
+                renderFeaturedItems(menuItems);
+                updateCart(); // Update cart in case prices changed
+                showNotification('Menu updated with latest changes');
+            }
+        }
+
+        // Load cart from localStorage
         function loadCart() {
             const savedCart = localStorage.getItem(`cart-${TABLE_ID}`);
             if (savedCart) {
@@ -993,27 +1066,89 @@
             }
         }
 
+        // Save cart to localStorage
         function saveCart() {
             localStorage.setItem(`cart-${TABLE_ID}`, JSON.stringify(cart));
         }
 
+        // Simulate synchronization with server/other devices
         function syncCart() {
             saveCart();
         }
 
-        function renderMenuItems(items = menuItems) {
+        // Render featured items
+        function renderFeaturedItems(menuItems) {
+            const featuredItems = menuItems.filter(item => item.isFeatured);
+            
+            if (featuredItems.length === 0) {
+                featuredItemsContainer.innerHTML = '<div class="empty-cart">No featured items today</div>';
+                return;
+            }
+            
+            featuredItemsContainer.innerHTML = '';
+            
+            featuredItems.forEach(item => {
+                const tagsHtml = item.tags.map(tag => {
+                    const tagClass = tag === 'veg' ? 'veg' : (tag === 'spicy' ? 'spicy' : (tag === 'signature' ? 'signature' : ''));
+                    return `<span class="item-tag ${tagClass}">${tag}</span>`;
+                }).join('');
+                
+                const stockInfo = getStockInfo(item.stock);
+                
+                const featuredItemElement = document.createElement('div');
+                featuredItemElement.classList.add('featured-item');
+                featuredItemElement.innerHTML = `
+                    <div style="position: relative;">
+                        <img src="${item.image}" alt="${item.name}" class="featured-image">
+                        <div class="featured-badge">Featured</div>
+                    </div>
+                    <div class="featured-content">
+                        <div class="featured-header">
+                            <h3 class="featured-title">${item.name}</h3>
+                            <div class="featured-price">¥${item.price}</div>
+                        </div>
+                        <p class="featured-desc">${item.description}</p>
+                        <div class="item-tags">
+                            ${tagsHtml}
+                        </div>
+                        ${stockInfo}
+                        <button class="bell-btn" data-id="${item.id}" ${item.stock === 0 ? 'disabled' : ''}>
+                            ${item.stock === 0 ? 'Sold Out' : '🛎️'}
+                        </button>
+                    </div>
+                `;
+                
+                featuredItemsContainer.appendChild(featuredItemElement);
+            });
+            
+            // Add event listeners to bell buttons in featured items
+            document.querySelectorAll('#featuredItems .bell-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    if (e.currentTarget.disabled) return;
+                    const itemId = parseInt(e.currentTarget.getAttribute('data-id'));
+                    addToCart(itemId);
+                });
+            });
+        }
+
+        // Render menu items
+        function renderMenuItems(menuItems, filteredItems = null) {
+            const itemsToRender = filteredItems || menuItems;
+            
             menuItemsContainer.innerHTML = '';
             
-            if (items.length === 0) {
+            if (itemsToRender.length === 0) {
                 menuItemsContainer.innerHTML = '<div class="empty-cart">No items found</div>';
                 return;
             }
             
-            items.forEach(item => {
+            itemsToRender.forEach(item => {
                 const tagsHtml = item.tags.map(tag => {
-                    const tagClass = tag === 'veg' ? 'veg' : (tag === 'spicy' ? 'spicy' : '');
+                    const tagClass = tag === 'veg' ? 'veg' : (tag === 'spicy' ? 'spicy' : (tag === 'signature' ? 'signature' : ''));
                     return `<span class="item-tag ${tagClass}">${tag}</span>`;
                 }).join('');
+                
+                const stockInfo = getStockInfo(item.stock);
                 
                 const menuItemElement = document.createElement('div');
                 menuItemElement.classList.add('menu-item');
@@ -1025,11 +1160,17 @@
                             <div class="item-price">¥${item.price}</div>
                         </div>
                         <p class="item-desc">${item.description}</p>
+                        <div class="item-tags">
+                            ${tagsHtml}
+                        </div>
+                        ${stockInfo}
                         <div class="item-footer">
                             <div class="item-tags">
                                 ${tagsHtml}
                             </div>
-                            <button class="bell-btn" data-id="${item.id}">🛎️</button>
+                            <button class="bell-btn" data-id="${item.id}" ${item.stock === 0 ? 'disabled' : ''}>
+                                ${item.stock === 0 ? 'Sold Out' : '🛎️'}
+                            </button>
                         </div>
                     </div>
                 `;
@@ -1037,34 +1178,72 @@
                 menuItemsContainer.appendChild(menuItemElement);
             });
             
+            // Add event listeners to bell buttons
             document.querySelectorAll('.bell-btn').forEach(button => {
                 button.addEventListener('click', (e) => {
+                    if (e.currentTarget.disabled) return;
                     const itemId = parseInt(e.currentTarget.getAttribute('data-id'));
                     addToCart(itemId);
                 });
             });
         }
 
+        // Get stock info HTML
+        function getStockInfo(stock) {
+            if (stock === 0) {
+                return '<div class="stock-info out-of-stock">Out of Stock</div>';
+            } else if (stock < 5) {
+                return `<div class="stock-info low-stock">Only ${stock} left</div>`;
+            } else {
+                return `<div class="stock-info">In Stock</div>`;
+            }
+        }
+
+        // Add item to cart
         function addToCart(itemId) {
+            const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
             const item = menuItems.find(i => i.id === itemId);
-            if (!item) return;
             
+            if (!item) {
+                showNotification('Item not found!', 'error');
+                return;
+            }
+            
+            if (item.stock === 0) {
+                showNotification('This item is out of stock!', 'error');
+                return;
+            }
+            
+            // Check if this item already exists in cart
             const existingItemIndex = cart.findIndex(i => i.id === itemId);
             
             if (existingItemIndex !== -1) {
+                // Check if we have enough stock
+                if (cart[existingItemIndex].quantity >= item.stock) {
+                    showNotification(`Only ${item.stock} available in stock!`, 'error');
+                    return;
+                }
+                
+                // Increment quantity if same item
                 cart[existingItemIndex].quantity += 1;
             } else {
+                // Add new item
                 cart.push({
-                    ...item, 
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
                     quantity: 1
                 });
             }
             
             updateCart();
             showNotification(`Added ${item.name} to order`);
+            
+            // Sync to localStorage
             saveCart();
         }
 
+        // Remove item from cart
         function removeFromCart(itemId) {
             const itemIndex = cart.findIndex(i => i.id === itemId);
             if (itemIndex === -1) return;
@@ -1079,45 +1258,65 @@
             
             updateCart();
             showNotification(`Removed ${item.name} from order`);
+            
+            // Sync to localStorage
             saveCart();
         }
 
+        // Update cart display
         function updateCart() {
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
+            
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => {
+                const menuItem = menuItems.find(i => i.id === item.id);
+                return sum + (menuItem ? menuItem.price * item.quantity : 0);
+            }, 0);
+            
             const tax = subtotal * TAX_RATE;
             const total = subtotal + tax + SERVICE_FEE;
             
+            // Update UI
             subtotalElement.textContent = `¥${subtotal.toFixed(2)}`;
             taxElement.textContent = `¥${tax.toFixed(2)}`;
             totalElement.textContent = `¥${total.toFixed(2)}`;
             
+            // Update cart count
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             cartCount.textContent = totalItems;
             
+            // Enable/disable checkout button
+            checkoutBtn.disabled = cart.length === 0;
+            
+            // Render cart items
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = '<div class="empty-cart">Your table order is empty</div>';
                 return;
             }
             
             cartItemsContainer.innerHTML = '';
-            cart.forEach(item => {
+            cart.forEach(cartItem => {
+                const menuItem = menuItems.find(i => i.id === cartItem.id);
+                if (!menuItem) return;
+                
                 const cartItemElement = document.createElement('div');
                 cartItemElement.classList.add('cart-item');
                 cartItemElement.innerHTML = `
                     <div class="cart-item-info">
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">¥${item.price} × ${item.quantity}</div>
+                        <div class="cart-item-name">${menuItem.name}</div>
+                        <div class="cart-item-price">¥${menuItem.price} × ${cartItem.quantity}</div>
                     </div>
                     <div class="cart-item-controls">
-                        <button class="quantity-btn minus" data-id="${item.id}">-</button>
-                        <span>${item.quantity}</span>
-                        <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                        <button class="quantity-btn minus" data-id="${menuItem.id}">-</button>
+                        <span>${cartItem.quantity}</span>
+                        <button class="quantity-btn plus" data-id="${menuItem.id}" ${cartItem.quantity >= menuItem.stock ? 'disabled' : ''}>+</button>
                     </div>
                 `;
                 
                 cartItemsContainer.appendChild(cartItemElement);
             });
             
+            // Add event listeners to quantity buttons
             document.querySelectorAll('.quantity-btn.minus').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const itemId = parseInt(e.currentTarget.getAttribute('data-id'));
@@ -1127,32 +1326,44 @@
             
             document.querySelectorAll('.quantity-btn.plus').forEach(button => {
                 button.addEventListener('click', (e) => {
+                    if (e.currentTarget.disabled) return;
                     const itemId = parseInt(e.currentTarget.getAttribute('data-id'));
                     addToCart(itemId);
                 });
             });
         }
 
-        function showNotification(message) {
+        // Show notification
+        function showNotification(message, type = 'success') {
             notificationText.textContent = message;
+            notification.className = 'notification';
             notification.classList.add('show');
+            if (type === 'error') {
+                notification.classList.add('error');
+            }
             
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 3000);
         }
 
+        // Filter menu items by category
         function filterMenuByCategory(category) {
+            const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
+            
             if (category === 'all') {
                 renderMenuItems(menuItems);
                 return;
             }
             
             const filteredItems = menuItems.filter(item => item.category === category);
-            renderMenuItems(filteredItems);
+            renderMenuItems(menuItems, filteredItems);
         }
 
+        // Search menu items
         function searchMenuItems(query) {
+            const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
+            
             if (!query) {
                 renderMenuItems(menuItems);
                 return;
@@ -1164,15 +1375,18 @@
                 item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
             );
             
-            renderMenuItems(filteredItems);
+            renderMenuItems(menuItems, filteredItems);
         }
 
+        // Toggle mobile cart
         function toggleMobileCart() {
             cartContainer.classList.toggle('mobile-visible');
             overlay.classList.toggle('visible');
         }
 
+        // Setup event listeners
         function setupEventListeners() {
+            // Help modal
             helpBtn.addEventListener('click', () => {
                 helpModal.classList.add('active');
             });
@@ -1192,33 +1406,56 @@
                 }
             });
             
+            // Checkout button
             checkoutBtn.addEventListener('click', () => {
                 if (cart.length === 0) {
-                    showNotification('Your table order is empty!');
+                    showNotification('Your table order is empty!', 'error');
                     return;
                 }
                 
+                // Update stock levels
+                const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
+                
+                cart.forEach(cartItem => {
+                    const menuItem = menuItems.find(i => i.id === cartItem.id);
+                    if (menuItem) {
+                        menuItem.stock -= cartItem.quantity;
+                        if (menuItem.stock < 0) menuItem.stock = 0;
+                    }
+                });
+                
+                // Save updated menu items
+                localStorage.setItem('restaurant-menu', JSON.stringify(menuItems));
+                
+                // Simulate payment processing
                 showNotification('Redirecting to payment gateway...');
                 
                 setTimeout(() => {
                     alert('Payment successful! Your order has been placed.');
                     cart = [];
                     updateCart();
+                    // Clear the cart from localStorage
                     localStorage.removeItem(`cart-${TABLE_ID}`);
                     if (window.innerWidth <= 900) {
                         toggleMobileCart();
                     }
+                    
+                    // Reload menu to reflect stock changes
+                    loadMenuItems();
                 }, 2000);
             });
             
+            // Search functionality
             searchInput.addEventListener('input', (e) => {
                 searchMenuItems(e.target.value);
             });
             
+            // Category filtering
             categoryButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
                     const category = e.currentTarget.getAttribute('data-category');
                     
+                    // Update active button
                     categoryButtons.forEach(btn => btn.classList.remove('active'));
                     e.currentTarget.classList.add('active');
                     
@@ -1226,10 +1463,14 @@
                 });
             });
             
+            // Floating cart for mobile
             floatingCart.addEventListener('click', toggleMobileCart);
+            
+            // Overlay click to close cart
             overlay.addEventListener('click', toggleMobileCart);
         }
 
+        // Initialize the app
         init();
     </script>
 </body>

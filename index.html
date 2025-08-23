@@ -9,18 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #6B8E23;
-            --white: #FAFAF8;
-            --text-color: #333333;
-            --veg-green: #008000;
-            --nonveg-red: #D40000;
-            --border-color: #000000;
-            --header-bg: #D9D9D9;
-            --card-bg: #FFFFFF;
-            --shadow: 0px 4px 16px rgba(0, 0, 0, 0.08), 0px 0px 4px rgba(0, 0, 0, 0.04);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -29,118 +17,110 @@
         }
 
         body {
-            background-color: var(--white);
-            color: var(--text-color);
-            padding: 0;
-            max-width: 412px;
+            background-color: #FAFAF8;
+            color: #333333;
+            width: 412px;
+            min-height: 917px;
             margin: 0 auto;
+            padding: 24px 16px 80px 16px;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .container {
-            display: grid;
-            grid-template-columns: 16px 83px 16px 16px 83px 16px 83px 16px;
-            width: 100%;
-        }
-
-        /* Header with 4-grid layout */
+        /* Header */
         .header {
-            grid-column: 1 / -1;
             display: grid;
-            grid-template-columns: 83px 16px 83px 16px 83px;
-            gap: 16px;
-            padding: 16px 0;
-            align-items: center;
-            background-color: var(--header-bg);
-            margin-bottom: 16px;
+            grid-template-columns: 83px 16px 83px 16px 83px 16px 83px;
+            margin-bottom: 40px;
         }
 
-        .logo-box {
+        .logo {
             grid-column: 1 / 2;
-            background: var(--white);
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 8px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            margin-left: 16px;
-        }
-
-        .header-btn {
-            background-color: var(--primary);
-            color: white;
-            padding: 10px;
+            background: #FFFFFF;
+            border: 1px solid #CCCCCC;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
+            font-weight: bold;
+            font-size: 18px;
             height: 40px;
         }
 
-        .call-waiter {
+        .empty-space {
             grid-column: 3 / 4;
+            height: 40px;
+        }
+
+        .header-btn {
+            background: #6B8E23;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            height: 40px;
+            border: none;
+            text-align: center;
+            padding: 0 8px;
+            cursor: pointer;
+        }
+
+        .call-waiter {
+            grid-column: 5 / 6;
         }
 
         .table-number {
-            grid-column: 5 / 6;
+            grid-column: 7 / 8;
         }
 
         /* Search Bar */
         .search-container {
-            grid-column: 1 / -1;
-            position: relative;
-            margin: 0 16px 16px 16px;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 12px 12px 12px 40px;
+            background: #FFFFFF;
+            border: 0.5px solid #6B8E23;
             border-radius: 8px;
-            border: 0.5px solid var(--primary);
-            outline: none;
-            font-size: 16px;
-            background-color: var(--white);
-            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            height: 48px;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .search-container i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary);
+            color: #6B8E23;
+            margin-right: 8px;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+            background: transparent;
         }
 
         /* Filter Buttons */
         .filter-buttons {
-            grid-column: 1 / -1;
             display: grid;
             grid-template-columns: 83px 16px 83px;
-            gap: 16px;
-            margin: 0 16px 20px 16px;
+            margin-bottom: 16px;
         }
 
         .filter-btn {
-            background: var(--white);
+            background: #FFFFFF;
+            border: 0.5px solid #000000;
             border-radius: 8px;
-            border: 0.5px solid var(--border-color);
-            padding: 8px 5px;
             display: flex;
-            flex-direction: row;
-            gap: 8px;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
+            gap: 8px;
+            padding: 0 8px;
+            font-size: 12px;
             height: 32px;
-        }
-
-        .filter-btn.active {
-            background: rgba(107, 142, 35, 0.1);
-            border-color: var(--primary);
+            cursor: pointer;
+            white-space: nowrap;
         }
 
         .veg-btn {
@@ -151,130 +131,159 @@
             grid-column: 3 / 4;
         }
 
-        .indicator-frame {
-            background: var(--white);
+        .filter-btn.active {
+            background: rgba(107, 142, 35, 0.1);
+            border-color: #6B8E23;
+        }
+
+        .indicator {
+            width: 16px;
+            height: 16px;
             border-radius: 2px;
-            padding: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 16px;
-            height: 16px;
         }
 
         .veg-indicator {
-            border: 1px solid var(--veg-green);
+            border: 1px solid #008000;
         }
 
         .nonveg-indicator {
-            border: 1px solid var(--nonveg-red);
+            border: 1px solid #D40000;
         }
 
-        .indicator-dot {
-            border-radius: 50%;
+        .dot {
             width: 8px;
             height: 8px;
+            border-radius: 50%;
         }
 
         .veg-dot {
-            background: var(--veg-green);
+            background: #008000;
         }
 
         .nonveg-dot {
-            background: var(--nonveg-red);
+            background: #D40000;
         }
 
-        .filter-text {
-            color: var(--text-color);
-            font-size: 12px;
-            font-weight: 400;
-        }
-
-        /* Menu Items Grid */
+        /* Menu Items */
         .menu-grid {
-            grid-column: 1 / -1;
             display: grid;
-            grid-template-columns: 83px 16px 83px;
-            gap: 16px;
-            margin: 0 16px 80px 16px;
+            grid-template-columns: 83px 16px 83px 16px 83px 16px 83px;
+            gap: 16px 0;
         }
 
         .menu-item {
-            background-color: var(--card-bg);
+            background: #FFFFFF;
             border-radius: 8px;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
         }
 
         .menu-item:nth-child(odd) {
-            grid-column: 1 / 2;
+            grid-column: 1 / 4;
         }
 
         .menu-item:nth-child(even) {
-            grid-column: 3 / 4;
+            grid-column: 5 / 8;
         }
 
         .menu-item img {
             width: 100%;
-            height: 120px;
+            height: 152px;
             object-fit: cover;
         }
 
         .item-content {
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            padding: 16px 10px 10px 10px;
+            height: 99px;
         }
 
         .item-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 40px;
+            height: 16px;
         }
 
         .item-name {
-            font-weight: 500;
             font-size: 14px;
+            font-weight: 500;
         }
 
         .item-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 24px;
         }
 
         .item-price {
-            font-weight: 500;
             font-size: 14px;
+            font-weight: 500;
         }
 
         .add-btn {
-            background-color: var(--primary);
+            background: #6B8E23;
             color: white;
-            padding: 5px 15px;
-            border-radius: 3px;
             border: none;
+            border-radius: 3px;
+            padding: 0;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
+            height: 24px;
+            width: 83px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantity-btn {
+            background: #6B8E23;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .quantity {
+            font-size: 14px;
+            font-weight: 500;
+            min-width: 20px;
+            text-align: center;
         }
 
         /* Cart Bar */
         .cart-bar {
             position: fixed;
             bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--primary);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #6B8E23;
             color: white;
             padding: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
+            height: 56px;
+            width: 412px;
+            box-sizing: border-box;
         }
 
         .view-cart {
@@ -285,12 +294,12 @@
         /* Floating Cart */
         .floating-cart {
             position: fixed;
-            bottom: 80px;
+            bottom: 70px;
             right: 16px;
-            background: var(--primary);
+            background: #6B8E23;
             color: white;
-            width: 64px;
-            height: 64px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -306,410 +315,331 @@
             right: -5px;
             background: #E2B684;
             color: white;
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 12px;
             font-weight: bold;
-        }
-
-        /* Highlighted Item Modal */
-        .highlighted-item {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 400px;
-            z-index: 1001;
-            display: none;
-        }
-
-        .highlighted-item.active {
-            display: block;
-        }
-
-        .highlighted-image {
-            position: relative;
-        }
-
-        .highlighted-image img {
-            width: 100%;
-            height: auto;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.8);
-            color: #333;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .highlighted-content {
-            padding: 15px;
-        }
-
-        .item-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .highlighted-name {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .highlighted-price {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        .item-description {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.4;
-            margin-bottom: 20px;
-        }
-
-        .modal-add-btn {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        /* Overlay */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            display: none;
-        }
-
-        .overlay.active {
-            display: block;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header with 4-grid layout -->
-        <div class="header">
-            <div class="logo-box">LOGO</div>
-            <button class="header-btn call-waiter">
-                <i class="fas fa-user"></i>
-            </button>
-            <button class="header-btn table-number">
-                <i class="fas fa-utensils"></i> 18
-            </button>
-        </div>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">LOGO</div>
+        <div class="empty-space"></div>
+        <div class="header-btn call-waiter">Call Waiter</div>
+        <div class="header-btn table-number">Table 18</div>
+    </div>
 
-        <!-- Search Bar -->
-        <div class="search-container">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search Food Name" id="searchInput">
-        </div>
+    <!-- Search Bar -->
+    <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search Food Name" id="searchInput">
+    </div>
 
-        <!-- Filter Buttons -->
-        <div class="filter-buttons">
-            <button class="filter-btn veg-btn active" id="vegFilter">
-                <div class="indicator-frame veg-indicator">
-                    <div class="indicator-dot veg-dot"></div>
+    <!-- Filter Buttons -->
+    <div class="filter-buttons">
+        <button class="filter-btn veg-btn active" id="vegFilter">
+            <div class="indicator veg-indicator">
+                <div class="dot veg-dot"></div>
+            </div>
+            <span>Veg</span>
+        </button>
+        <button class="filter-btn nonveg-btn" id="nonVegFilter">
+            <div class="indicator nonveg-indicator">
+                <div class="dot nonveg-dot"></div>
+            </div>
+            <span>Non-Veg</span>
+        </button>
+    </div>
+
+    <!-- Menu Items -->
+    <div class="menu-grid" id="menuGrid">
+        <div class="menu-item" data-id="1">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Margherita Pizza">
+            <div class="item-content">
+                <div class="item-header">
+                    <div class="item-name">Margherita Pizza</div>
+                    <div class="indicator veg-indicator">
+                        <div class="dot veg-dot"></div>
+                    </div>
                 </div>
-                <span class="filter-text">Veg</span>
-            </button>
-            <button class="filter-btn nonveg-btn" id="nonVegFilter">
-                <div class="indicator-frame nonveg-indicator">
-                    <div class="indicator-dot nonveg-dot"></div>
+                <div class="item-footer">
+                    <div class="item-price">₹180</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus" style="display:none;">-</button>
+                        <span class="quantity" style="display:none;">1</span>
+                        <button class="quantity-btn plus" style="display:none;">+</button>
+                        <button class="add-btn">ADD</button>
+                    </div>
                 </div>
-                <span class="filter-text">Non-Veg</span>
-            </button>
+            </div>
         </div>
 
-        <!-- Menu Items Grid -->
-        <div class="menu-grid" id="menuGrid">
-            <!-- Menu items will be dynamically inserted here -->
+        <div class="menu-item" data-id="2">
+            <img src="https://images.unsplash.com/photo-1571091655789-405eb7a3a3a8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Chicken Burger">
+            <div class="item-content">
+                <div class="item-header">
+                    <div class="item-name">Chicken Burger</div>
+                    <div class="indicator nonveg-indicator">
+                        <div class="dot nonveg-dot"></div>
+                    </div>
+                </div>
+                <div class="item-footer">
+                    <div class="item-price">₹220</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus" style="display:none;">-</button>
+                        <span class="quantity" style="display:none;">1</span>
+                        <button class="quantity-btn plus" style="display:none;">+</button>
+                        <button class="add-btn">ADD</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-item" data-id="3">
+            <img src="https://images.unsplash.com/photo-1621996346565-5e3dbc353d2e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Vegetable Pasta">
+            <div class="item-content">
+                <div class="item-header">
+                    <div class="item-name">Vegetable Pasta</div>
+                    <div class="indicator veg-indicator">
+                        <div class="dot veg-dot"></div>
+                    </div>
+                </div>
+                <div class="item-footer">
+                    <div class="item-price">₹160</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus" style="display:none;">-</button>
+                        <span class="quantity" style="display:none;">1</span>
+                        <button class="quantity-btn plus" style="display:none;">+</button>
+                        <button class="add-btn">ADD</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-item" data-id="4">
+            <img src="https://images.unsplash.com/photo-1519708227418-7c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Grilled Salmon">
+            <div class="item-content">
+                <div class="item-header">
+                    <div class="item-name">Grilled Salmon</div>
+                    <div class="indicator nonveg-indicator">
+                        <div class="dot nonveg-dot"></div>
+                    </div>
+                </div>
+                <div class="item-footer">
+                    <div class="item-price">₹320</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus" style="display:none;">-</button>
+                        <span class="quantity" style="display:none;">1</span>
+                        <button class="quantity-btn plus" style="display:none;">+</button>
+                        <button class="add-btn">ADD</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Cart Bar -->
     <div class="cart-bar">
-        <span id="cartCount">0 Items added</span>
+        <span id="cart-count">0 Items added</span>
         <span class="view-cart">View Cart ></span>
     </div>
 
     <!-- Floating Cart -->
-    <div class="floating-cart" id="floatingCart">
+    <div class="floating-cart">
         <i class="fas fa-shopping-cart"></i>
         <div class="cart-count">0</div>
     </div>
 
-    <!-- Highlighted Item Modal -->
-    <div class="highlighted-item" id="highlightedItem">
-        <div class="highlighted-image">
-            <img id="modalImage" src="" alt="Food item">
-            <button class="close-btn" id="closeModal">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="highlighted-content">
-            <div class="item-title-row">
-                <div class="highlighted-name" id="modalName"></div>
-                <div class="highlighted-price" id="modalPrice"></div>
-            </div>
-            <p class="item-description" id="modalDescription"></p>
-            <button class="modal-add-btn" id="modalAddBtn">ADD</button>
-        </div>
-    </div>
-
-    <!-- Overlay -->
-    <div class="overlay" id="overlay"></div>
-
     <script>
-        // Sample menu data
-        const menuItems = [
-            {
-                id: 1,
-                name: "Margherita Pizza",
-                price: 180,
-                category: "main",
-                description: "Classic pizza with tomato sauce, mozzarella, and fresh basil",
-                image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                isVeg: true
-            },
-            {
-                id: 2,
-                name: "Chicken Burger",
-                price: 220,
-                category: "main",
-                description: "Juicy chicken patty with lettuce, tomato, and special sauce",
-                image: "https://images.unsplash.com/photo-1571091655789-405eb7a3a3a8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                isVeg: false
-            },
-            {
-                id: 3,
-                name: "Vegetable Pasta",
-                price: 160,
-                category: "main",
-                description: "Pasta with fresh vegetables in a creamy sauce",
-                image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                isVeg: true
-            },
-            {
-                id: 4,
-                name: "Grilled Salmon",
-                price: 320,
-                category: "main",
-                description: "Fresh salmon fillet with herbs and lemon butter sauce",
-                image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                isVeg: false
-            },
-            {
-                id: 5,
-                name: "Caesar Salad",
-                price: 140,
-                category: "appetizer",
-                description: "Fresh romaine lettuce with Caesar dressing and croutons",
-                image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                isVeg: true
-            },
-            {
-                id: 6,
-                name: "Chocolate Cake",
-                price: 120,
-                category: "dessert",
-                description: "Rich chocolate cake with chocolate frosting",
-                image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                isVeg: true
-            }
-        ];
+        // Cart functionality
+        let cart = {};
+        let totalItems = 0;
 
         // DOM Elements
-        const menuGrid = document.getElementById('menuGrid');
+        const cartCountElement = document.getElementById('cart-count');
+        const floatingCartCount = document.querySelector('.cart-count');
+        const addButtons = document.querySelectorAll('.add-btn');
+        const searchInput = document.getElementById('searchInput');
         const vegFilter = document.getElementById('vegFilter');
         const nonVegFilter = document.getElementById('nonVegFilter');
-        const searchInput = document.getElementById('searchInput');
-        const floatingCart = document.getElementById('floatingCart');
-        const cartCount = document.getElementById('cartCount');
-        const highlightedItem = document.getElementById('highlightedItem');
-        const overlay = document.getElementById('overlay');
-        const closeModal = document.getElementById('closeModal');
-        const modalImage = document.getElementById('modalImage');
-        const modalName = document.getElementById('modalName');
-        const modalPrice = document.getElementById('modalPrice');
-        const modalDescription = document.getElementById('modalDescription');
-        const modalAddBtn = document.getElementById('modalAddBtn');
+        const menuGrid = document.getElementById('menuGrid');
 
-        // Cart functionality
-        let cart = [];
-        let currentCartCount = 0;
-
-        // Initialize the menu
-        function initMenu() {
-            renderMenuItems(menuItems);
-            setupEventListeners();
+        // Initialize cart
+        function initCart() {
+            updateCartDisplay();
         }
 
-        // Render menu items
-        function renderMenuItems(items) {
-            menuGrid.innerHTML = '';
+        // Add item to cart
+        function addToCart(itemId, itemName, itemPrice) {
+            if (cart[itemId]) {
+                cart[itemId].quantity++;
+            } else {
+                cart[itemId] = {
+                    name: itemName,
+                    price: itemPrice,
+                    quantity: 1
+                };
+            }
+            totalItems++;
+            updateCartDisplay();
             
-            items.forEach(item => {
-                const menuItemElement = document.createElement('div');
-                menuItemElement.classList.add('menu-item');
-                menuItemElement.setAttribute('data-id', item.id);
+            // Show quantity controls for this item
+            const controls = document.querySelector(`.menu-item[data-id="${itemId}"] .quantity-controls`);
+            if (controls) {
+                controls.querySelector('.minus').style.display = 'block';
+                controls.querySelector('.quantity').style.display = 'block';
+                controls.querySelector('.plus').style.display = 'block';
+                controls.querySelector('.add-btn').style.display = 'none';
+                controls.querySelector('.quantity').textContent = cart[itemId].quantity;
+            }
+        }
+
+        // Remove item from cart
+        function removeFromCart(itemId) {
+            if (cart[itemId]) {
+                cart[itemId].quantity--;
+                totalItems--;
                 
-                menuItemElement.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <div class="item-name">${item.name}</div>
-                            <div class="indicator-frame ${item.isVeg ? 'veg-indicator' : 'nonveg-indicator'}">
-                                <div class="indicator-dot ${item.isVeg ? 'veg-dot' : 'nonveg-dot'}"></div>
-                            </div>
-                        </div>
-                        <div class="item-footer">
-                            <div class="item-price">₹${item.price}</div>
-                            <button class="add-btn" data-id="${item.id}">ADD</button>
-                        </div>
-                    </div>
-                `;
+                if (cart[itemId].quantity === 0) {
+                    delete cart[itemId];
+                    
+                    // Hide quantity controls for this item
+                    const controls = document.querySelector(`.menu-item[data-id="${itemId}"] .quantity-controls`);
+                    if (controls) {
+                        controls.querySelector('.minus').style.display = 'none';
+                        controls.querySelector('.quantity').style.display = 'none';
+                        controls.querySelector('.plus').style.display = 'none';
+                        controls.querySelector('.add-btn').style.display = 'block';
+                    }
+                } else {
+                    // Update quantity display for this item
+                    const controls = document.querySelector(`.menu-item[data-id="${itemId}"] .quantity-controls`);
+                    if (controls) {
+                        controls.querySelector('.quantity').textContent = cart[itemId].quantity;
+                    }
+                }
                 
-                menuGrid.appendChild(menuItemElement);
+                updateCartDisplay();
+            }
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            cartCountElement.textContent = `${totalItems} Items added`;
+            floatingCartCount.textContent = totalItems;
+        }
+
+        // Filter menu items
+        function filterMenuItems(type) {
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            menuItems.forEach(item => {
+                const isVeg = item.querySelector('.veg-indicator') !== null;
+                
+                if (type === 'veg' && !isVeg) {
+                    item.style.display = 'none';
+                } else if (type === 'nonveg' && isVeg) {
+                    item.style.display = 'none';
+                } else {
+                    item.style.display = 'block';
+                }
+            });
+        }
+
+        // Search menu items
+        function searchMenuItems(query) {
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            menuItems.forEach(item => {
+                const itemName = item.querySelector('.item-name').textContent.toLowerCase();
+                
+                if (itemName.includes(query.toLowerCase())) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
             });
         }
 
         // Setup event listeners
         function setupEventListeners() {
+            // Add to cart buttons
+            addButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const menuItem = e.target.closest('.menu-item');
+                    const itemId = menuItem.getAttribute('data-id');
+                    const itemName = menuItem.querySelector('.item-name').textContent;
+                    const itemPrice = menuItem.querySelector('.item-price').textContent;
+                    
+                    addToCart(itemId, itemName, itemPrice);
+                });
+            });
+
+            // Plus buttons
+            document.querySelectorAll('.plus').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const menuItem = e.target.closest('.menu-item');
+                    const itemId = menuItem.getAttribute('data-id');
+                    const itemName = menuItem.querySelector('.item-name').textContent;
+                    const itemPrice = menuItem.querySelector('.item-price').textContent;
+                    
+                    addToCart(itemId, itemName, itemPrice);
+                });
+            });
+
+            // Minus buttons
+            document.querySelectorAll('.minus').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const menuItem = e.target.closest('.menu-item');
+                    const itemId = menuItem.getAttribute('data-id');
+                    
+                    removeFromCart(itemId);
+                });
+            });
+
             // Filter buttons
             vegFilter.addEventListener('click', () => {
                 vegFilter.classList.add('active');
                 nonVegFilter.classList.remove('active');
                 filterMenuItems('veg');
             });
-            
+
             nonVegFilter.addEventListener('click', () => {
                 nonVegFilter.classList.add('active');
                 vegFilter.classList.remove('active');
                 filterMenuItems('nonveg');
             });
-            
+
             // Search functionality
             searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                const filteredItems = menuItems.filter(item => 
-                    item.name.toLowerCase().includes(searchTerm) ||
-                    item.description.toLowerCase().includes(searchTerm)
-                );
-                renderMenuItems(filteredItems);
+                searchMenuItems(e.target.value);
             });
-            
-            // Add to cart and modal functionality
-            menuGrid.addEventListener('click', (e) => {
-                if (e.target.classList.contains('add-btn')) {
-                    const itemId = parseInt(e.target.getAttribute('data-id'));
-                    addToCart(itemId);
-                } else if (e.target.closest('.menu-item')) {
-                    const itemId = parseInt(e.target.closest('.menu-item').getAttribute('data-id'));
-                    showItemModal(itemId);
-                }
+
+            // View cart button
+            document.querySelector('.view-cart').addEventListener('click', () => {
+                alert(`You have ${totalItems} items in your cart!`);
             });
-            
-            // Modal functionality
-            closeModal.addEventListener('click', hideItemModal);
-            overlay.addEventListener('click', hideItemModal);
-            modalAddBtn.addEventListener('click', () => {
-                const itemId = parseInt(modalAddBtn.getAttribute('data-id'));
-                addToCart(itemId);
-                hideItemModal();
+
+            // Floating cart button
+            document.querySelector('.floating-cart').addEventListener('click', () => {
+                alert(`You have ${totalItems} items in your cart!`);
             });
         }
 
-        // Filter menu items
-        function filterMenuItems(type) {
-            let filteredItems;
-            
-            if (type === 'veg') {
-                filteredItems = menuItems.filter(item => item.isVeg);
-            } else if (type === 'nonveg') {
-                filteredItems = menuItems.filter(item => !item.isVeg);
-            } else {
-                filteredItems = menuItems;
-            }
-            
-            renderMenuItems(filteredItems);
+        // Initialize the application
+        function init() {
+            initCart();
+            setupEventListeners();
         }
 
-        // Add to cart
-        function addToCart(itemId) {
-            const item = menuItems.find(i => i.id === itemId);
-            if (item) {
-                cart.push(item);
-                currentCartCount++;
-                updateCartCount();
-                
-                // Show confirmation
-                alert(`Added ${item.name} to cart!`);
-            }
-        }
-
-        // Update cart count
-        function updateCartCount() {
-            const cartCountElement = document.querySelector('.cart-count');
-            cartCountElement.textContent = currentCartCount;
-            cartCount.textContent = `${currentCartCount} Items added`;
-        }
-
-        // Show item modal
-        function showItemModal(itemId) {
-            const item = menuItems.find(i => i.id === itemId);
-            if (item) {
-                modalImage.src = item.image;
-                modalName.textContent = item.name;
-                modalPrice.textContent = `₹${item.price}`;
-                modalDescription.textContent = item.description;
-                modalAddBtn.setAttribute('data-id', item.id);
-                
-                highlightedItem.classList.add('active');
-                overlay.classList.add('active');
-            }
-        }
-
-        // Hide item modal
-        function hideItemModal() {
-            highlightedItem.classList.remove('active');
-            overlay.classList.remove('active');
-        }
-
-        // Initialize the menu when the page loads
-        document.addEventListener('DOMContentLoaded', initMenu);
+        // Start the application
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>

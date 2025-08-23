@@ -34,6 +34,11 @@
             --text-dark: #333;
             --text-light: #555;
             --border-color: #ddd;
+            
+            /* Veg indicator colors */
+            --veg-green: #008000;
+            --veg-border: #008000;
+            --non-veg-red: #d40000;
         }
 
         * {
@@ -54,6 +59,7 @@
             margin: 0 auto;
         }
 
+        /* Updated Header Styles */
         header {
             background-color: var(--header-bg);
             padding: 15px 10px;
@@ -65,7 +71,7 @@
         }
 
         .header-left .logo {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
             padding: 8px 15px;
             background-color: #fff;
@@ -78,6 +84,7 @@
             gap: 10px;
         }
 
+        /* Updated header buttons */
         .header-btn {
             background-color: var(--button-bg);
             color: white;
@@ -90,34 +97,42 @@
             cursor: pointer;
             font-size: 14px;
         }
-
+        
         .header-btn:nth-child(2) {
             background-color: #fff;
             color: var(--button-bg);
             border: 1px solid var(--button-bg);
         }
 
+        /* Updated Search Bar */
         .search-container {
-            position: relative;
+            background: var(--white, #fafaf8);
+            border-radius: 8px;
+            border: 0.5px solid var(--primary, #6b8e23);
+            padding: 12px 8px;
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            align-items: center;
             margin-bottom: 15px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08), 0px 0px 4px rgba(0, 0, 0, 0.04);
         }
 
         .search-container input {
             width: 100%;
-            padding: 12px 12px 12px 40px;
-            border-radius: var(--radius);
-            border: 1px dashed #ccc;
+            background: transparent;
+            border: none;
             outline: none;
             font-size: 16px;
-            background-color: var(--search-bg);
+            color: rgba(51, 51, 33, 0.49);
+            font-family: "Roboto-Light", sans-serif;
+            font-weight: 300;
         }
 
-        .search-container i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #888;
+        .search-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
         }
 
         .filter-buttons {
@@ -126,40 +141,122 @@
             margin-bottom: 20px;
         }
 
-        .filter-btn {
-            background-color: #fff;
-            color: var(--text-dark);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid #ccc;
+        /* Updated Veg indicator styles */
+        .veg-indicator-btn {
+            background: var(--white, #fafaf8);
+            border-radius: 8px;
+            border: 0.5px solid #000000;
+            padding: 8px 5px;
             display: flex;
+            flex-direction: row;
+            gap: 8px;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
             cursor: pointer;
-            font-size: 14px;
+            width: 83px;
+            height: 32px;
         }
         
-        .filter-btn.active {
-            background-color: var(--button-bg);
-            color: white;
-            border-color: var(--button-bg);
+        .veg-indicator-btn.active {
+            background: rgba(107, 142, 35, 0.1);
+            border-color: var(--primery, #6b8e23);
         }
 
-        .filter-btn .veg-dot, .filter-btn .non-veg-dot {
-            width: 10px;
-            height: 10px;
+        .frame-125 {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .frame-124 {
+            background: #fafaf8;
+            border-radius: 2px;
+            border: 1px solid var(--veg-border);
+            padding: 4px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+            justify-content: flex-start;
+            width: 16px;
+            height: 16px;
+        }
+
+        .ellipse-9 {
+            background: var(--veg-green);
             border-radius: 50%;
-            border: 1px solid #000;
+            width: 8px;
+            height: 8px;
+        }
+
+        .veg-text {
+            color: #000000;
+            text-align: left;
+            font-family: "Roboto-Regular", sans-serif;
+            font-size: 12px;
+            font-weight: 400;
         }
         
-        .filter-btn .veg-dot {
-            background-color: #A5CD91;
+        /* Updated Non-Veg indicator styles */
+        .non-veg-indicator-btn {
+            background: var(--white, #fafaf8);
+            border-radius: 8px;
+            border: 0.5px solid #000000;
+            padding: 8px 5px;
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            width: 83px;
+            height: 32px;
         }
         
-        .filter-btn .non-veg-dot {
-            background-color: #E74C3C;
+        .non-veg-indicator-btn.active {
+            background: rgba(212, 0, 0, 0.1);
+            border-color: var(--non-veg-red);
         }
-        
+
+        .frame-133 {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .frame-1242 {
+            background: #fafaf8;
+            border-radius: 2px;
+            border: 1px solid var(--non-veg-red);
+            padding: 4px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+            justify-content: flex-start;
+            width: 16px;
+            height: 16px;
+        }
+
+        .ellipse-92 {
+            background: var(--non-veg-red);
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+        }
+
+        .non-veg-text {
+            color: #000000;
+            text-align: left;
+            font-family: "Roboto-Regular", sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+        }
+
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -174,6 +271,7 @@
             margin-bottom: 20px;
         }
 
+        /* Updated Menu Item Styles */
         .menu-item {
             background-color: var(--item-bg);
             border-radius: var(--radius);
@@ -187,8 +285,9 @@
         
         .menu-item img {
             width: 100%;
-            height: 120px;
+            height: 152px;
             object-fit: cover;
+            border-radius: 8px 8px 0 0;
         }
 
         .item-content {
@@ -197,6 +296,7 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            gap: 40px;
         }
         
         .item-name-row {
@@ -206,57 +306,63 @@
         }
 
         .item-content .item-name {
-            font-weight: bold;
+            font-weight: 500;
             font-size: 16px;
+            color: var(--text-dark);
         }
         
         .item-content .item-price-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 5px;
         }
         
         .item-content .item-price {
-            font-weight: bold;
-            color: var(--text-light);
+            font-weight: 500;
+            font-size: 16px;
+            color: var(--text-dark);
         }
         
-        .veg-indicator {
+        .item-veg-indicator {
+            width: 16px;
+            height: 16px;
             position: relative;
-            width: 15px;
-            height: 15px;
-            border: 1px solid #ccc;
-            background-color: white;
+            background: #f7f7f5;
+            border-radius: 2px;
+            border: 0.5px solid var(--veg-border);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
         }
         
-        .veg-indicator .dot {
+        .item-veg-indicator .dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
+            background-color: var(--veg-green);
         }
         
-        .veg-indicator.veg .dot {
-            background-color: #A5CD91;
+        .item-veg-indicator.non-veg {
+            border-color: var(--non-veg-red);
         }
         
-        .veg-indicator.non-veg .dot {
-            background-color: #E74C3C;
+        .item-veg-indicator.non-veg .dot {
+            background-color: var(--non-veg-red);
         }
         
         .add-btn {
-            background-color: #A5CD91;
+            background-color: var(--primary);
             color: white;
-            padding: 8px 20px;
-            border-radius: 5px;
+            padding: 5px 22px;
+            border-radius: 3px;
             border: none;
-            font-size: 14px;
+            font-size: 12px;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 10px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .highlighted-item {
@@ -695,24 +801,38 @@
         </header>
 
         <div class="search-container">
-            <i class="fas fa-search"></i>
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.095 16.1827C11.7882 16.1827 13.2261 15.5901 14.4087 14.405C15.5914 13.2198 16.1827 11.7807 16.1827 10.0877C16.1827 8.39456 15.5908 6.95506 14.407 5.76923C13.2232 4.5834 11.7857 3.99048 10.0945 3.99048C8.40333 3.99048 6.96475 4.58298 5.77875 5.76798C4.59292 6.95314 4 8.39231 4 10.0855C4 11.7785 4.59258 13.2179 5.77775 14.4037C6.96292 15.5897 8.402 16.1827 10.095 16.1827ZM10.0963 17.6827C7.98458 17.6827 6.19067 16.9446 4.7145 15.4682C3.23817 13.9919 2.5 12.198 2.5 10.0865C2.5 7.97498 3.23817 6.18106 4.7145 4.70473C6.19067 3.22856 7.98458 2.49048 10.0963 2.49048C12.2078 2.49048 14 3.22856 15.473 4.70473C16.9462 6.18106 17.6827 7.97498 17.6827 10.0865C17.6827 11.006 17.5321 11.8721 17.2308 12.6847C16.9294 13.4974 16.5089 14.2326 15.9693 14.8905L21.5 20.4365L20.4557 21.5L14.9 15.9595C14.2423 16.5056 13.5072 16.9294 12.6945 17.2307C11.8817 17.5321 11.0156 17.6827 10.0963 17.6827Z" fill="#6B8E23"/>
+            </svg>
             <input type="text" placeholder="Search Food Name" id="searchInput">
         </div>
 
         <div class="filter-buttons">
-            <button class="filter-btn" data-filter="veg">
-                <span class="veg-dot"></span> Veg
+            <button class="veg-indicator-btn" id="vegFilterBtn" data-filter="veg">
+                <div class="frame-125">
+                    <div class="frame-124">
+                        <div class="ellipse-9"></div>
+                    </div>
+                    <div class="veg-text">Veg</div>
+                </div>
             </button>
-            <button class="filter-btn" data-filter="non-veg">
-                <span class="non-veg-dot"></span> Non-Veg
+            <button class="non-veg-indicator-btn" id="nonVegFilterBtn" data-filter="non-veg">
+                <div class="frame-133">
+                    <div class="frame-1242">
+                        <div class="ellipse-92"></div>
+                    </div>
+                    <div class="non-veg-text">Non-Veg</div>
+                </div>
             </button>
         </div>
         
         <div id="menuCategories">
-            </div>
+            <!-- Menu items will be rendered here -->
+        </div>
 
         <div class="highlighted-item hidden" id="highlightedItem">
-            </div>
+            <!-- Highlighted item details will be rendered here -->
+        </div>
     </div>
 
     <div class="floating-cart" id="floatingCart">
@@ -761,7 +881,7 @@
                 <i class="fas fa-times"></i>
             </button>
             <div class="modal-icon">
-                <i class="fas fa-concierge-bell"></i>
+                <i class="fas fa-concierce-bell"></i>
             </div>
             <h2 class="modal-title">Need Assistance?</h2>
             <p class="modal-text">A staff member will be with you shortly. Please describe your issue below and we'll assist you as quickly as possible.</p>
@@ -879,7 +999,7 @@
         const notificationText = document.getElementById('notificationText');
         const checkoutBtn = document.getElementById('checkoutBtn');
         const searchInput = document.getElementById('searchInput');
-        const filterButtons = document.querySelectorAll('.filter-btn');
+        const filterButtons = document.querySelectorAll('.veg-indicator-btn, .non-veg-indicator-btn');
         const floatingCart = document.getElementById('floatingCart');
         const cartContainer = document.getElementById('cartContainer');
         const overlay = document.getElementById('overlay');
@@ -953,7 +1073,7 @@
                 menuGrid.classList.add('menu-grid');
                 
                 categoryItems.forEach(item => {
-                    const vegClass = item.isVeg ? 'veg' : 'non-veg';
+                    const vegClass = item.isVeg ? '' : 'non-veg';
                     const menuItemElement = document.createElement('div');
                     menuItemElement.classList.add('menu-item');
                     menuItemElement.setAttribute('data-id', item.id);
@@ -962,11 +1082,10 @@
                         <div class="item-content">
                             <div class="item-name-row">
                                 <span class="item-name">${item.name}</span>
-                                <button class="veg-indicator ${vegClass}">
+                                <div class="item-veg-indicator ${vegClass}">
                                     <span class="dot"></span>
-                                </button>
+                                </div>
                             </div>
-                            <p class="item-description">${item.description}</p>
                             <div class="item-price-row">
                                 <span class="item-price">¥${item.price}</span>
                                 <button class="add-btn" data-id="${item.id}">ADD</button>
@@ -1017,7 +1136,7 @@
         }
 
         function renderHighlightedItem(item) {
-            const vegClass = item.isVeg ? 'veg' : 'non-veg';
+            const vegClass = item.isVeg ? '' : 'non-veg';
             
             highlightedItemContainer.innerHTML = `
                 <div class="highlighted-image">
@@ -1025,9 +1144,9 @@
                     <button class="close-btn" id="closeHighlightedBtn">
                         <i class="fas fa-times"></i>
                     </button>
-                    <button class="veg-indicator ${vegClass}">
+                    <div class="item-veg-indicator ${vegClass}">
                         <span class="dot"></span>
-                    </button>
+                    </div>
                     <button class="nav-arrow left hidden"><i class="fas fa-chevron-left"></i></button>
                     <button class="nav-arrow right hidden"><i class="fas fa-chevron-right"></i></button>
                 </div>
@@ -1262,10 +1381,13 @@
                 button.addEventListener('click', (e) => {
                     const filter = e.currentTarget.getAttribute('data-filter');
                     
+                    // Check if the clicked button is already active
                     if (e.currentTarget.classList.contains('active')) {
+                        // If it is, deactivate it and show all items
                         e.currentTarget.classList.remove('active');
                         filterMenuByVeg('all');
                     } else {
+                        // If not, activate it and deactivate the other button
                         filterButtons.forEach(btn => btn.classList.remove('active'));
                         e.currentTarget.classList.add('active');
                         filterMenuByVeg(filter);

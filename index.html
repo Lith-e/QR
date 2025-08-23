@@ -3,119 +3,366 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serene Bites | Digital Menu</title>
+    <title>QR Menu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #5A7F6E;
-            --secondary: #8AAE9D;
-            --accent: #C4D8CF;
+            /* Updated Avocado Green Palette */
+            --primary: #A5CD91;
+            --secondary: #D4E181;
+            --accent: #E5EFB8;
             --light: #F8FAF9;
-            --dark: #2D4A3E;
-            --darker: #1E3228;
+            --dark: #586124;
+            --darker: #3D441D;
             --card-bg: #FFFFFF;
             --card-hover: #F8FAF9;
-            --success: #5A7F6E;
+            --success: #A5CD91;
             --warning: #E2B684;
             --danger: #E74C3C;
             --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            --radius: 16px;
+            --radius: 8px;
+            
+            /* New colors from image */
+            --header-bg: #D9D9D9;
+            --button-bg: #A5CD91;
+            --main-bg: #F0F0E5;
+            --search-bg: #fff;
+            --item-bg: #fff;
+            --text-dark: #333;
+            --text-light: #555;
+            --border-color: #ddd;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Roboto', sans-serif;
         }
-        
+
         body {
-            background-color: var(--light);
-            color: var(--dark);
-            min-height: 100vh;
-            overflow-x: hidden;
+            background-color: var(--main-bg);
+            color: var(--text-dark);
+            padding: 10px;
         }
-        
+
         .container {
-            max-width: 1200px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 0 16px;
         }
-        
+
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--darker) 100%);
-            padding: 16px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow);
+            background-color: var(--header-bg);
+            padding: 15px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+        }
+
+        .header-left .logo {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 8px 15px;
+            background-color: #fff;
+            border-radius: var(--radius);
+            border: 1px solid #ccc;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-btn {
+            background-color: var(--button-bg);
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .header-btn:nth-child(2) {
+            background-color: #fff;
+            color: var(--button-bg);
+            border: 1px solid var(--button-bg);
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border-radius: var(--radius);
+            border: 1px dashed #ccc;
+            outline: none;
+            font-size: 16px;
+            background-color: var(--search-bg);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            background-color: #fff;
+            color: var(--text-dark);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            font-size: 14px;
         }
         
-        .header-content {
+        .filter-btn.active {
+            background-color: var(--button-bg);
+            color: white;
+            border-color: var(--button-bg);
+        }
+
+        .filter-btn .veg-dot, .filter-btn .non-veg-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid #000;
+        }
+        
+        .filter-btn .veg-dot {
+            background-color: #A5CD91;
+        }
+        
+        .filter-btn .non-veg-dot {
+            background-color: #E74C3C;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            background-color: var(--item-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .item-content {
+            padding: 10px;
+            text-align: left;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .item-name-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+
+        .item-content .item-name {
+            font-weight: bold;
+            font-size: 16px;
         }
         
-        .logo-placeholder {
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
+        .item-content .item-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+        
+        .item-content .item-price {
+            font-weight: bold;
+            color: var(--text-light);
+        }
+        
+        .veg-indicator {
+            position: relative;
+            width: 15px;
+            height: 15px;
+            border: 1px solid #ccc;
+            background-color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 20px;
+            border-radius: 50%;
         }
         
-        .logo h1 {
-            font-size: 1.5rem;
-            color: white;
-            font-weight: 700;
+        .veg-indicator .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
         }
         
-        .table-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .veg-indicator.veg .dot {
+            background-color: #A5CD91;
         }
         
-        .table-number {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
+        .veg-indicator.non-veg .dot {
+            background-color: #E74C3C;
         }
         
-        .help-btn {
-            background-color: transparent;
-            border: 1px solid white;
+        .add-btn {
+            background-color: #A5CD91;
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 8px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .highlighted-item {
+            background-color: var(--item-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            z-index: 1001;
         }
         
-        .help-btn:hover {
-            background-color: white;
+        .highlighted-image {
+            position: relative;
+        }
+        
+        .highlighted-image img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .highlighted-image .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        
+        .highlighted-image .nav-arrow.left {
+            left: 10px;
+            border-radius: 50%;
+        }
+
+        .highlighted-content {
+            padding: 15px;
+        }
+        
+        .highlighted-content .item-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .highlighted-content .item-title-row .item-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .highlighted-content .item-title-row .item-price {
+            font-size: 20px;
+            font-weight: bold;
             color: var(--primary);
         }
+
+        .highlighted-content .item-description {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
         
+        .highlighted-content .add-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* New styles for the close button on the highlighted item */
+        .highlighted-item .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1002;
+            font-size: 18px;
+        }
+
+        /* Modal and Notification styles from original code */
         .floating-cart {
             position: fixed;
             bottom: 24px;
@@ -153,218 +400,7 @@
             font-size: 0.8rem;
             font-weight: bold;
         }
-        
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            margin: 24px 0;
-        }
-        
-        .menu-header {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            gap: 16px;
-        }
-        
-        .menu-title {
-            font-size: 1.7rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-        
-        .search-box {
-            position: relative;
-            width: 100%;
-        }
-        
-        .search-box input {
-            width: 100%;
-            padding: 14px 16px 14px 48px;
-            border-radius: var(--radius);
-            border: 1px solid #E0E6E3;
-            background-color: white;
-            color: var(--dark);
-            outline: none;
-            box-shadow: var(--shadow);
-            font-size: 1rem;
-        }
-        
-        .search-box i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary);
-        }
-        
-        .categories {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding: 8px 4px;
-            scrollbar-width: none;
-        }
-        
-        .categories::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .category-btn {
-            background-color: white;
-            border: 1px solid #E0E6E3;
-            color: #666;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-            box-shadow: var(--shadow);
-            font-size: 0.9rem;
-        }
-        
-        .category-btn.active, .category-btn:hover {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--darker) 100%);
-            color: white;
-            border-color: transparent;
-        }
-        
-        .menu-items {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        
-        .menu-item {
-            background-color: var(--card-bg);
-            border-radius: var(--radius);
-            overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-        
-        .menu-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            background-color: var(--card-hover);
-        }
-        
-        .item-image {
-            height: 180px;
-            width: 100%;
-            object-fit: cover;
-        }
-        
-        .item-info {
-            padding: 16px;
-        }
-        
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-        
-        .item-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .item-price {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        
-        .item-desc {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-            line-height: 1.5;
-        }
-        
-        .item-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .item-tags {
-            display: flex;
-            gap: 6px;
-        }
-        
-        .item-tag {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 12px;
-            background-color: rgba(90, 127, 110, 0.15);
-            color: var(--success);
-        }
-        
-        .item-tag.veg {
-            background-color: rgba(90, 127, 110, 0.15);
-            color: var(--success);
-        }
-        
-        .item-tag.spicy {
-            background-color: rgba(226, 182, 132, 0.2);
-            color: var(--warning);
-        }
-        
-        .item-tag.signature {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: var(--danger);
-        }
-        
-        .stock-info {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 8px;
-        }
-        
-        .low-stock {
-            color: var(--warning);
-            font-weight: 600;
-        }
-        
-        .out-of-stock {
-            color: var(--danger);
-            font-weight: 600;
-        }
-        
-        .bell-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--darker) 100%);
-            border: none;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            font-size: 1.2rem;
-        }
-        
-        .bell-btn:hover {
-            transform: scale(1.1) rotate(12deg);
-            box-shadow: 0 0 15px rgba(90, 127, 110, 0.4);
-        }
-        
-        .bell-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
+
         .cart-container {
             background: white;
             border-radius: var(--radius);
@@ -514,98 +550,6 @@
             color: #999;
         }
         
-        .featured-section {
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--dark);
-            margin-bottom: 20px;
-            position: relative;
-            padding-left: 16px;
-        }
-        
-        .section-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 70%;
-            width: 5px;
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        
-        .featured-items {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        
-        .featured-item {
-            background: white;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
-            position: relative;
-        }
-        
-        .featured-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .featured-image {
-            height: 160px;
-            width: 100%;
-            object-fit: cover;
-        }
-        
-        .featured-content {
-            padding: 16px;
-        }
-        
-        .featured-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .featured-title {
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 1.1rem;
-        }
-        
-        .featured-price {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        
-        .featured-desc {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-            line-height: 1.5;
-        }
-        
-        .featured-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--warning);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 14px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
         .help-modal {
             position: fixed;
             top: 0;
@@ -732,155 +676,85 @@
             display: block;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @media (min-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-            
-            .logo h1 {
-                font-size: 1.8rem;
-            }
-            
-            .menu-header {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            .search-box {
-                width: 320px;
-            }
-            
-            .menu-items, .featured-items {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .main-content {
-                grid-template-columns: 1fr 380px;
-                gap: 30px;
-                margin: 30px 0;
-            }
-            
-            .cart-container {
-                position: sticky;
-                top: 110px;
-                display: block;
-                width: 100%;
-                max-width: none;
-                transform: none;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .menu-items, .featured-items {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <div class="logo-placeholder">
-                    <i class="fas fa-leaf"></i>
-                </div>
-                <h1>Serene Bites</h1>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <div class="logo">LOGO</div>
             </div>
-            <div class="table-info">
-                <div class="table-number">
-                    <i class="fas fa-chair"></i> Table 12
-                </div>
-                <button class="help-btn" id="helpBtn">
-                    <i class="fas fa-concierge-bell"></i> Call Waiter
+            <div class="header-right">
+                <button class="header-btn" id="helpBtn">
+                    <i class="fas fa-user"></i> Call waiter
+                </button>
+                <button class="header-btn" id="tableBtn">
+                    <i class="fas fa-utensils"></i> 18
                 </button>
             </div>
+        </header>
+
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search Food Name" id="searchInput">
         </div>
-    </header>
-    
+
+        <div class="filter-buttons">
+            <button class="filter-btn" data-filter="veg">
+                <span class="veg-dot"></span> Veg
+            </button>
+            <button class="filter-btn" data-filter="non-veg">
+                <span class="non-veg-dot"></span> Non-Veg
+            </button>
+        </div>
+        
+        <div id="menuCategories">
+            </div>
+
+        <div class="highlighted-item hidden" id="highlightedItem">
+            </div>
+    </div>
+
     <div class="floating-cart" id="floatingCart">
         <i class="fas fa-shopping-cart"></i>
         <div class="cart-count">0</div>
     </div>
     
     <div class="overlay" id="overlay"></div>
-    
-    <div class="container main-content">
-        <section class="menu-section">
-            <div class="featured-section">
-                <h2 class="section-title">Today's Specials</h2>
-                <div class="featured-items" id="featuredItems">
-                    <!-- Featured items will be dynamically generated -->
-                </div>
-            </div>
-            
-            <div class="menu-header">
-                <h2 class="menu-title">Our Menu</h2>
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search dishes..." id="searchInput">
-                </div>
-            </div>
-            
-            <div class="categories">
-                <button class="category-btn active" data-category="all">All</button>
-                <button class="category-btn" data-category="appetizers">Appetizers</button>
-                <button class="category-btn" data-category="main">Main Course</button>
-                <button class="category-btn" data-category="dimsum">Dim Sum</button>
-                <button class="category-btn" data-category="noodles">Noodles</button>
-                <button class="category-btn" data-category="desserts">Desserts</button>
-                <button class="category-btn" data-category="drinks">Drinks</button>
-            </div>
-            
-            <div class="menu-items" id="menuItems">
-                <!-- Menu items will be dynamically generated -->
-            </div>
-        </section>
+
+    <aside class="cart-container" id="cartContainer">
+        <h2 class="cart-title">
+            <i class="fas fa-shopping-cart"></i> Table Order
+        </h2>
         
-        <aside class="cart-container" id="cartContainer">
-            <h2 class="cart-title">
-                <i class="fas fa-shopping-cart"></i> Table Order
-            </h2>
-            
-            <div class="cart-items" id="cartItems">
-                <div class="empty-cart">Your table order is empty</div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">Your table order is empty</div>
+        </div>
+        
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">¥0</span>
+            </div>
+            <div class="summary-row">
+                <span>Tax (10%)</span>
+                <span id="tax">¥0</span>
+            </div>
+            <div class="summary-row">
+                <span>Service Fee</span>
+                <span>¥15</span>
+            </div>
+            <div class="summary-row summary-total">
+                <span>Total</span>
+                <span id="total">¥15</span>
             </div>
             
-            <div class="cart-summary">
-                <div class="summary-row">
-                    <span>Subtotal</span>
-                    <span id="subtotal">¥0</span>
-                </div>
-                <div class="summary-row">
-                    <span>Tax (10%)</span>
-                    <span id="tax">¥0</span>
-                </div>
-                <div class="summary-row">
-                    <span>Service Fee</span>
-                    <span>¥15</span>
-                </div>
-                <div class="summary-row summary-total">
-                    <span>Total</span>
-                    <span id="total">¥15</span>
-                </div>
-                
-                <button class="checkout-btn pulse" id="checkoutBtn">
-                    <i class="fas fa-lock"></i> Checkout Now
-                </button>
-            </div>
-        </aside>
-    </div>
-    
+            <button class="checkout-btn pulse" id="checkoutBtn">
+                <i class="fas fa-lock"></i> Checkout Now
+            </button>
+        </div>
+    </aside>
+
     <div class="help-modal" id="helpModal">
         <div class="modal-content">
             <button class="modal-close" id="closeModal">
@@ -900,9 +774,8 @@
         <i class="fas fa-check-circle"></i>
         <span id="notificationText">Item added to your cart!</span>
     </div>
-    
+
     <script>
-        // Default menu items (used only if no menu items are found in localStorage)
         const defaultMenuItems = [
             {
                 id: 1,
@@ -911,9 +784,7 @@
                 category: "main",
                 description: "Crispy duck served with thin pancakes, spring onions, cucumber and hoisin sauce.",
                 image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["signature", "spicy"],
-                stock: 12,
-                isFeatured: true
+                isVeg: false
             },
             {
                 id: 2,
@@ -922,9 +793,7 @@
                 category: "dimsum",
                 description: "Assortment of steamed and fried dim sum including har gow, siu mai, and char siu bao.",
                 image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["chef's pick", "veg"],
-                stock: 8,
-                isFeatured: true
+                isVeg: true
             },
             {
                 id: 3,
@@ -933,8 +802,7 @@
                 category: "main",
                 description: "Stir-fried chicken with peanuts, vegetables, and chili peppers in a savory sauce.",
                 image: "https://images.unsplash.com/photo-1516714435131-44d6b64dc6f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["spicy"],
-                stock: 5
+                isVeg: false
             },
             {
                 id: 4,
@@ -943,8 +811,7 @@
                 category: "appetizers",
                 description: "A spicy and tangy soup with tofu, mushrooms, and bamboo shoots.",
                 image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["spicy", "veg"],
-                stock: 15
+                isVeg: true
             },
             {
                 id: 5,
@@ -953,8 +820,7 @@
                 category: "main",
                 description: "Soft tofu in a spicy sauce with minced meat and Sichuan peppercorns.",
                 image: "https://images.unsplash.com/photo-1630918037678-a8f7e0fbf90b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["spicy", "signature"],
-                stock: 7
+                isVeg: false
             },
             {
                 id: 6,
@@ -963,8 +829,7 @@
                 category: "appetizers",
                 description: "Crispy rolls filled with vegetables and served with sweet chili sauce.",
                 image: "https://images.unsplash.com/photo-1526318896980-cf78c088247c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["veg"],
-                stock: 20
+                isVeg: true
             },
             {
                 id: 7,
@@ -973,8 +838,7 @@
                 category: "desserts",
                 description: "Warm chocolate cake with a molten center, served with vanilla ice cream.",
                 image: "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["signature"],
-                stock: 10
+                isVeg: true
             },
             {
                 id: 8,
@@ -983,20 +847,26 @@
                 category: "drinks",
                 description: "Premium jasmine tea brewed to perfection.",
                 image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-                tags: ["veg"],
-                stock: 50
+                isVeg: true
+            },
+            {
+                id: 9,
+                name: "Chicken Biryani",
+                price: 180,
+                category: "main",
+                description: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                image: "http://googleusercontent.com/file_content/0",
+                isVeg: false
             }
         ];
 
-        // Cart array to store items
         let cart = [];
         const TAX_RATE = 0.1;
         const SERVICE_FEE = 15;
-        const TABLE_ID = "table-12";
-
-        // DOM Elements
-        const menuItemsContainer = document.getElementById('menuItems');
-        const featuredItemsContainer = document.getElementById('featuredItems');
+        const TABLE_ID = "table-18";
+        
+        const menuCategoriesContainer = document.getElementById('menuCategories');
+        const highlightedItemContainer = document.getElementById('highlightedItem');
         const cartItemsContainer = document.getElementById('cartItems');
         const subtotalElement = document.getElementById('subtotal');
         const taxElement = document.getElementById('tax');
@@ -1009,56 +879,40 @@
         const notificationText = document.getElementById('notificationText');
         const checkoutBtn = document.getElementById('checkoutBtn');
         const searchInput = document.getElementById('searchInput');
-        const categoryButtons = document.querySelectorAll('.category-btn');
+        const filterButtons = document.querySelectorAll('.filter-btn');
         const floatingCart = document.getElementById('floatingCart');
         const cartContainer = document.getElementById('cartContainer');
         const overlay = document.getElementById('overlay');
         const cartCount = document.querySelector('.cart-count');
 
-        // Initialize the page
         function init() {
-            // Load cart from localStorage for this table
             loadCart();
-            
-            // Load menu items from admin panel
             loadMenuItems();
-            
-            // Set up event listeners
             setupEventListeners();
-            
-            // Set up periodic cart synchronization
             setInterval(syncCart, 2000);
-            
-            // Listen for changes to menu items from admin
             window.addEventListener('storage', handleStorageChange);
         }
 
-        // Load menu items from localStorage (set by admin)
         function loadMenuItems() {
             let menuItems = JSON.parse(localStorage.getItem('restaurant-menu'));
             
-            // If no menu items found, use default items and save them
             if (!menuItems || menuItems.length === 0) {
                 menuItems = defaultMenuItems;
                 localStorage.setItem('restaurant-menu', JSON.stringify(menuItems));
             }
             
             renderMenuItems(menuItems);
-            renderFeaturedItems(menuItems);
         }
 
-        // Handle storage changes (when admin updates menu)
         function handleStorageChange(e) {
             if (e.key === 'restaurant-menu') {
                 const menuItems = JSON.parse(e.newValue);
                 renderMenuItems(menuItems);
-                renderFeaturedItems(menuItems);
-                updateCart(); // Update cart in case prices changed
+                updateCart();
                 showNotification('Menu updated with latest changes');
             }
         }
 
-        // Load cart from localStorage
         function loadCart() {
             const savedCart = localStorage.getItem(`cart-${TABLE_ID}`);
             if (savedCart) {
@@ -1066,140 +920,144 @@
             }
         }
 
-        // Save cart to localStorage
         function saveCart() {
             localStorage.setItem(`cart-${TABLE_ID}`, JSON.stringify(cart));
         }
 
-        // Simulate synchronization with server/other devices
         function syncCart() {
             saveCart();
         }
 
-        // Render featured items
-        function renderFeaturedItems(menuItems) {
-            const featuredItems = menuItems.filter(item => item.isFeatured);
-            
-            if (featuredItems.length === 0) {
-                featuredItemsContainer.innerHTML = '<div class="empty-cart">No featured items today</div>';
-                return;
-            }
-            
-            featuredItemsContainer.innerHTML = '';
-            
-            featuredItems.forEach(item => {
-                const tagsHtml = item.tags.map(tag => {
-                    const tagClass = tag === 'veg' ? 'veg' : (tag === 'spicy' ? 'spicy' : (tag === 'signature' ? 'signature' : ''));
-                    return `<span class="item-tag ${tagClass}">${tag}</span>`;
-                }).join('');
-                
-                const stockInfo = getStockInfo(item.stock);
-                
-                const featuredItemElement = document.createElement('div');
-                featuredItemElement.classList.add('featured-item');
-                featuredItemElement.innerHTML = `
-                    <div style="position: relative;">
-                        <img src="${item.image}" alt="${item.name}" class="featured-image">
-                        <div class="featured-badge">Featured</div>
-                    </div>
-                    <div class="featured-content">
-                        <div class="featured-header">
-                            <h3 class="featured-title">${item.name}</h3>
-                            <div class="featured-price">¥${item.price}</div>
-                        </div>
-                        <p class="featured-desc">${item.description}</p>
-                        <div class="item-tags">
-                            ${tagsHtml}
-                        </div>
-                        ${stockInfo}
-                        <button class="bell-btn" data-id="${item.id}" ${item.stock === 0 ? 'disabled' : ''}>
-                            ${item.stock === 0 ? 'Sold Out' : '🛎️'}
-                        </button>
-                    </div>
-                `;
-                
-                featuredItemsContainer.appendChild(featuredItemElement);
-            });
-            
-            // Add event listeners to bell buttons in featured items
-            document.querySelectorAll('#featuredItems .bell-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    if (e.currentTarget.disabled) return;
-                    const itemId = parseInt(e.currentTarget.getAttribute('data-id'));
-                    addToCart(itemId);
-                });
-            });
-        }
-
-        // Render menu items
         function renderMenuItems(menuItems, filteredItems = null) {
             const itemsToRender = filteredItems || menuItems;
             
-            menuItemsContainer.innerHTML = '';
+            menuCategoriesContainer.innerHTML = '';
             
             if (itemsToRender.length === 0) {
-                menuItemsContainer.innerHTML = '<div class="empty-cart">No items found</div>';
+                menuCategoriesContainer.innerHTML = '<div class="empty-cart">No items found</div>';
                 return;
             }
             
-            itemsToRender.forEach(item => {
-                const tagsHtml = item.tags.map(tag => {
-                    const tagClass = tag === 'veg' ? 'veg' : (tag === 'spicy' ? 'spicy' : (tag === 'signature' ? 'signature' : ''));
-                    return `<span class="item-tag ${tagClass}">${tag}</span>`;
-                }).join('');
+            const categories = [...new Set(itemsToRender.map(item => item.category))];
+            
+            categories.forEach(category => {
+                const categoryItems = itemsToRender.filter(item => item.category === category);
                 
-                const stockInfo = getStockInfo(item.stock);
+                const categorySection = document.createElement('div');
                 
-                const menuItemElement = document.createElement('div');
-                menuItemElement.classList.add('menu-item');
-                menuItemElement.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="item-image">
-                    <div class="item-info">
-                        <div class="item-header">
-                            <h3 class="item-title">${item.name}</h3>
-                            <div class="item-price">¥${item.price}</div>
-                        </div>
-                        <p class="item-desc">${item.description}</p>
-                        <div class="item-tags">
-                            ${tagsHtml}
-                        </div>
-                        ${stockInfo}
-                        <div class="item-footer">
-                            <div class="item-tags">
-                                ${tagsHtml}
+                const categoryTitle = document.createElement('h2');
+                categoryTitle.classList.add('section-title');
+                categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                
+                const menuGrid = document.createElement('div');
+                menuGrid.classList.add('menu-grid');
+                
+                categoryItems.forEach(item => {
+                    const vegClass = item.isVeg ? 'veg' : 'non-veg';
+                    const menuItemElement = document.createElement('div');
+                    menuItemElement.classList.add('menu-item');
+                    menuItemElement.setAttribute('data-id', item.id);
+                    menuItemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-content">
+                            <div class="item-name-row">
+                                <span class="item-name">${item.name}</span>
+                                <button class="veg-indicator ${vegClass}">
+                                    <span class="dot"></span>
+                                </button>
                             </div>
-                            <button class="bell-btn" data-id="${item.id}" ${item.stock === 0 ? 'disabled' : ''}>
-                                ${item.stock === 0 ? 'Sold Out' : '🛎️'}
-                            </button>
+                            <p class="item-description">${item.description}</p>
+                            <div class="item-price-row">
+                                <span class="item-price">¥${item.price}</span>
+                                <button class="add-btn" data-id="${item.id}">ADD</button>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                    
+                    menuGrid.appendChild(menuItemElement);
+                });
                 
-                menuItemsContainer.appendChild(menuItemElement);
+                categorySection.appendChild(categoryTitle);
+                categorySection.appendChild(menuGrid);
+                menuCategoriesContainer.appendChild(categorySection);
             });
             
-            // Add event listeners to bell buttons
-            document.querySelectorAll('.bell-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    if (e.currentTarget.disabled) return;
-                    const itemId = parseInt(e.currentTarget.getAttribute('data-id'));
-                    addToCart(itemId);
+            setupClickEffect(menuItems);
+        }
+        
+        function setupClickEffect(menuItems) {
+            const allMenuItems = document.querySelectorAll('.menu-item');
+            const menuWrapper = document.getElementById('menuCategories');
+
+            allMenuItems.forEach(itemElement => {
+                itemElement.addEventListener('click', (event) => {
+                    // Check if the click was on the "ADD" button
+                    if (event.target.classList.contains('add-btn')) {
+                        const itemId = parseInt(event.target.getAttribute('data-id'));
+                        addToCart(itemId);
+                        return;
+                    }
+                    
+                    const itemId = parseInt(itemElement.getAttribute('data-id'));
+                    const item = menuItems.find(i => i.id === itemId);
+                    if (item) {
+                        renderHighlightedItem(item);
+                        highlightedItemContainer.classList.remove('hidden');
+                        menuWrapper.classList.add('hidden');
+                    }
                 });
+            });
+
+            // Added close functionality to overlay
+            overlay.addEventListener('click', () => {
+                 highlightedItemContainer.classList.add('hidden');
+                 menuWrapper.classList.remove('hidden');
+                 overlay.classList.remove('visible');
             });
         }
 
-        // Get stock info HTML
-        function getStockInfo(stock) {
-            if (stock === 0) {
-                return '<div class="stock-info out-of-stock">Out of Stock</div>';
-            } else if (stock < 5) {
-                return `<div class="stock-info low-stock">Only ${stock} left</div>`;
-            } else {
-                return `<div class="stock-info">In Stock</div>`;
-            }
+        function renderHighlightedItem(item) {
+            const vegClass = item.isVeg ? 'veg' : 'non-veg';
+            
+            highlightedItemContainer.innerHTML = `
+                <div class="highlighted-image">
+                    <img src="${item.image}" alt="${item.name}">
+                    <button class="close-btn" id="closeHighlightedBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button class="veg-indicator ${vegClass}">
+                        <span class="dot"></span>
+                    </button>
+                    <button class="nav-arrow left hidden"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-arrow right hidden"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="highlighted-content">
+                    <div class="item-title-row">
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-price">¥${item.price}</span>
+                    </div>
+                    <p class="item-description">${item.description}</p>
+                    <button class="add-btn" data-id="${item.id}">ADD</button>
+                </div>
+            `;
+            
+            // Added event listener for the new close button
+            document.getElementById('closeHighlightedBtn').addEventListener('click', () => {
+                highlightedItemContainer.classList.add('hidden');
+                menuCategoriesContainer.classList.remove('hidden');
+                overlay.classList.remove('visible');
+            });
+
+             document.querySelector('#highlightedItem .add-btn').addEventListener('click', (e) => {
+                const itemId = parseInt(e.currentTarget.getAttribute('data-id'));
+                addToCart(itemId);
+                highlightedItemContainer.classList.add('hidden');
+                menuCategoriesContainer.classList.remove('hidden');
+                overlay.classList.remove('visible');
+            });
+            overlay.classList.add('visible');
         }
 
-        // Add item to cart
         function addToCart(itemId) {
             const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
             const item = menuItems.find(i => i.id === itemId);
@@ -1209,25 +1067,11 @@
                 return;
             }
             
-            if (item.stock === 0) {
-                showNotification('This item is out of stock!', 'error');
-                return;
-            }
-            
-            // Check if this item already exists in cart
             const existingItemIndex = cart.findIndex(i => i.id === itemId);
             
             if (existingItemIndex !== -1) {
-                // Check if we have enough stock
-                if (cart[existingItemIndex].quantity >= item.stock) {
-                    showNotification(`Only ${item.stock} available in stock!`, 'error');
-                    return;
-                }
-                
-                // Increment quantity if same item
                 cart[existingItemIndex].quantity += 1;
             } else {
-                // Add new item
                 cart.push({
                     id: item.id,
                     name: item.name,
@@ -1239,11 +1083,9 @@
             updateCart();
             showNotification(`Added ${item.name} to order`);
             
-            // Sync to localStorage
             saveCart();
         }
 
-        // Remove item from cart
         function removeFromCart(itemId) {
             const itemIndex = cart.findIndex(i => i.id === itemId);
             if (itemIndex === -1) return;
@@ -1259,15 +1101,12 @@
             updateCart();
             showNotification(`Removed ${item.name} from order`);
             
-            // Sync to localStorage
             saveCart();
         }
 
-        // Update cart display
         function updateCart() {
             const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
             
-            // Calculate totals
             const subtotal = cart.reduce((sum, item) => {
                 const menuItem = menuItems.find(i => i.id === item.id);
                 return sum + (menuItem ? menuItem.price * item.quantity : 0);
@@ -1276,19 +1115,15 @@
             const tax = subtotal * TAX_RATE;
             const total = subtotal + tax + SERVICE_FEE;
             
-            // Update UI
             subtotalElement.textContent = `¥${subtotal.toFixed(2)}`;
             taxElement.textContent = `¥${tax.toFixed(2)}`;
             totalElement.textContent = `¥${total.toFixed(2)}`;
             
-            // Update cart count
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             cartCount.textContent = totalItems;
             
-            // Enable/disable checkout button
             checkoutBtn.disabled = cart.length === 0;
             
-            // Render cart items
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = '<div class="empty-cart">Your table order is empty</div>';
                 return;
@@ -1309,14 +1144,13 @@
                     <div class="cart-item-controls">
                         <button class="quantity-btn minus" data-id="${menuItem.id}">-</button>
                         <span>${cartItem.quantity}</span>
-                        <button class="quantity-btn plus" data-id="${menuItem.id}" ${cartItem.quantity >= menuItem.stock ? 'disabled' : ''}>+</button>
+                        <button class="quantity-btn plus" data-id="${menuItem.id}">+</button>
                     </div>
                 `;
                 
                 cartItemsContainer.appendChild(cartItemElement);
             });
             
-            // Add event listeners to quantity buttons
             document.querySelectorAll('.quantity-btn.minus').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const itemId = parseInt(e.currentTarget.getAttribute('data-id'));
@@ -1326,14 +1160,12 @@
             
             document.querySelectorAll('.quantity-btn.plus').forEach(button => {
                 button.addEventListener('click', (e) => {
-                    if (e.currentTarget.disabled) return;
                     const itemId = parseInt(e.currentTarget.getAttribute('data-id'));
                     addToCart(itemId);
                 });
             });
         }
 
-        // Show notification
         function showNotification(message, type = 'success') {
             notificationText.textContent = message;
             notification.className = 'notification';
@@ -1347,20 +1179,20 @@
             }, 3000);
         }
 
-        // Filter menu items by category
-        function filterMenuByCategory(category) {
+        function filterMenuByVeg(filter) {
             const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
             
-            if (category === 'all') {
+            if (filter === 'all') {
                 renderMenuItems(menuItems);
-                return;
+            } else if (filter === 'veg') {
+                const filtered = menuItems.filter(item => item.isVeg);
+                renderMenuItems(menuItems, filtered);
+            } else if (filter === 'non-veg') {
+                const filtered = menuItems.filter(item => !item.isVeg);
+                renderMenuItems(menuItems, filtered);
             }
-            
-            const filteredItems = menuItems.filter(item => item.category === category);
-            renderMenuItems(menuItems, filteredItems);
         }
 
-        // Search menu items
         function searchMenuItems(query) {
             const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
             
@@ -1370,23 +1202,18 @@
             }
             
             const filteredItems = menuItems.filter(item => 
-                item.name.toLowerCase().includes(query.toLowerCase()) ||
-                item.description.toLowerCase().includes(query.toLowerCase()) ||
-                item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+                item.name.toLowerCase().includes(query.toLowerCase())
             );
             
             renderMenuItems(menuItems, filteredItems);
         }
 
-        // Toggle mobile cart
         function toggleMobileCart() {
             cartContainer.classList.toggle('mobile-visible');
             overlay.classList.toggle('visible');
         }
 
-        // Setup event listeners
         function setupEventListeners() {
-            // Help modal
             helpBtn.addEventListener('click', () => {
                 helpModal.classList.add('active');
             });
@@ -1406,71 +1233,50 @@
                 }
             });
             
-            // Checkout button
             checkoutBtn.addEventListener('click', () => {
                 if (cart.length === 0) {
                     showNotification('Your table order is empty!', 'error');
                     return;
                 }
                 
-                // Update stock levels
-                const menuItems = JSON.parse(localStorage.getItem('restaurant-menu')) || defaultMenuItems;
-                
-                cart.forEach(cartItem => {
-                    const menuItem = menuItems.find(i => i.id === cartItem.id);
-                    if (menuItem) {
-                        menuItem.stock -= cartItem.quantity;
-                        if (menuItem.stock < 0) menuItem.stock = 0;
-                    }
-                });
-                
-                // Save updated menu items
-                localStorage.setItem('restaurant-menu', JSON.stringify(menuItems));
-                
-                // Simulate payment processing
                 showNotification('Redirecting to payment gateway...');
                 
                 setTimeout(() => {
                     alert('Payment successful! Your order has been placed.');
                     cart = [];
                     updateCart();
-                    // Clear the cart from localStorage
                     localStorage.removeItem(`cart-${TABLE_ID}`);
                     if (window.innerWidth <= 900) {
                         toggleMobileCart();
                     }
                     
-                    // Reload menu to reflect stock changes
                     loadMenuItems();
                 }, 2000);
             });
             
-            // Search functionality
             searchInput.addEventListener('input', (e) => {
                 searchMenuItems(e.target.value);
             });
             
-            // Category filtering
-            categoryButtons.forEach(button => {
+            filterButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
-                    const category = e.currentTarget.getAttribute('data-category');
+                    const filter = e.currentTarget.getAttribute('data-filter');
                     
-                    // Update active button
-                    categoryButtons.forEach(btn => btn.classList.remove('active'));
-                    e.currentTarget.classList.add('active');
-                    
-                    filterMenuByCategory(category);
+                    if (e.currentTarget.classList.contains('active')) {
+                        e.currentTarget.classList.remove('active');
+                        filterMenuByVeg('all');
+                    } else {
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        e.currentTarget.classList.add('active');
+                        filterMenuByVeg(filter);
+                    }
                 });
             });
             
-            // Floating cart for mobile
             floatingCart.addEventListener('click', toggleMobileCart);
-            
-            // Overlay click to close cart
             overlay.addEventListener('click', toggleMobileCart);
         }
 
-        // Initialize the app
         init();
     </script>
 </body>

@@ -12,6 +12,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Roboto', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
@@ -21,18 +22,20 @@
             display: flex;
             flex-direction: column;
             padding: 16px;
-            max-width: 412px;
             margin: 0 auto;
             position: relative;
             overflow-x: hidden;
-            /* BLACK OUTLINE */
             border: 2px solid #000;
+            max-width: 412px;
+            width: 100%;
         }
         
+        /* Header with 4 equal spaces */
         .header {
             background: #f0f0f0;
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 83px 83px 83px 83px;
+            gap: 16px;
             align-items: center;
             height: 88px;
             margin-bottom: 16px;
@@ -49,16 +52,26 @@
             align-items: center;
             justify-content: center;
             box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+            border: 1px solid #000;
+            grid-column: 1;
         }
         
         .logo {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
+        }
+        
+        /* Empty space in header (space 2) */
+        .header-space {
+            grid-column: 2;
+            width: 83px;
+            height: 40px;
         }
         
         .header-buttons {
             display: flex;
-            gap: 12px;
+            gap: 16px;
+            grid-column: 3 / span 2;
         }
         
         .header-btn {
@@ -75,18 +88,16 @@
             gap: 5px;
             padding: 0 10px;
             box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
-            border: none;
+            border: 1px solid #000;
             transition: all 0.3s ease;
+            font-size: 12px;
         }
         
         .header-btn:active {
             box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
         }
         
-        .call-waiter {
-            font-size: 11.64px; 
-        }
-        
+        /* Search bar */
         .search-container {
             background: #ffffff;
             border-radius: 8px;
@@ -95,7 +106,7 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 16px;
-            width: 380px;
+            width: 100%;
             height: 48px;
             border: 1px solid #d1d1d1;
             transition: all 0.3s ease;
@@ -110,10 +121,12 @@
             color: rgba(51, 51, 51, 0.49);
         }
         
+        /* Filters aligned with header */
         .filters {
-            display: flex;
+            display: grid;
+            grid-template-columns: 83px 83px 83px 83px;
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             width: 100%;
         }
         
@@ -126,10 +139,20 @@
             width: 83px;
             height: 32px;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             transition: all 0.3s ease;
-            box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
-            border: none;
+            box-shadow: 5px 5px 10px #d1d1d1, 5px 5px 10px #ffffff;
+            border: 1px solid #000;
+        }
+        
+        /* Veg filter aligned with logo (space 1) */
+        .filter-btn.veg {
+            grid-column: 1;
+        }
+        
+        /* Non-veg filter aligned with empty space (space 2) */
+        .filter-btn.non-veg {
+            grid-column: 2;
         }
         
         .filter-btn.active {
@@ -183,14 +206,17 @@
         .filter-text {
             white-space: nowrap;
             font-size: 12px;
+            font-weight: 500;
         }
         
+        /* Menu grid with exact dimensions */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 182px);
             gap: 16px;
             margin-bottom: 80px;
             width: 100%;
+            justify-content: center;
         }
         
         .menu-item {
@@ -209,7 +235,7 @@
         }
         
         .food-image {
-            width: 100%;
+            width: 182px;
             height: 152px;
             object-fit: cover;
             display: block;
@@ -222,20 +248,25 @@
             flex-direction: column;
             gap: 40px;
             width: 166px;
-            margin: 0 auto;
+            height: 83px;
+            margin:  px;
         }
         
         .food-name-type {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            width: 166px;
             height: 19px;
         }
         
         .food-name {
             font-weight: 500;
             font-size: 16px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 140px;
         }
         
         .food-type {
@@ -282,12 +313,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            width: 166px;
             height: 24px;
         }
         
         .food-price {
-            font-weight: 500;
+            font-weight: 600;
             font-size: 16px;
         }
         
@@ -295,7 +326,6 @@
             background: #6b8e23;
             color: #ffffff;
             border-radius: 3px;
-            padding: 5px 12px;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
@@ -321,6 +351,7 @@
             height: 24px;
             background: #6b8e23;
             border-radius: 3px;
+            padding: 0 4px;
         }
         
         .quantity-btn {
@@ -334,6 +365,7 @@
             cursor: pointer;
             font-weight: 600;
             color: white;
+            font-size: 14px;
         }
         
         .quantity-value {
@@ -341,9 +373,10 @@
             font-weight: 500;
             color: white;
             background: none;
-            padding: 0 5px;
+            padding: 0 4px;
         }
         
+        /* Cart summary */
         .cart-summary {
             background: #6b8e23;
             color: white;
@@ -352,7 +385,7 @@
             display: none;
             justify-content: space-between;
             align-items: center;
-            width: 380px;
+            width: 100%;
             height: 56px;
             position: fixed;
             bottom: 20px;
@@ -360,6 +393,7 @@
             transform: translateX(-50%);
             box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
             z-index: 10;
+            max-width: 380px;
         }
         
         .cart-summary.visible {
@@ -381,49 +415,52 @@
             cursor: pointer;
         }
         
+        /* Food detail view - Fixed dimensions 412x480 */
         .food-detail {
             display: none;
             position: fixed;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%) translateY(100%);
-            width: 412px;
-            height: 50vh; /* Adjusted height */
+            width: 100%;
+            height: 480px;
             background: #f0f0f0;
             z-index: 20;
-            padding: 20px;
+            padding: 0;
             border-top-left-radius: 16px;
             border-top-right-radius: 16px;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
             transition: transform 0.4s ease;
+            max-width: 412px;
+            overflow: hidden;
         }
         
         .food-detail.active {
             transform: translateX(-50%) translateY(0);
-            display: block;
+            display: flex;
+            flex-direction: column;
         }
         
         .detail-image-container {
             position: relative;
             width: 100%;
-            height: 50%; 
-            margin-bottom: 16px;
+            height: 240px;
+            flex-shrink: 0;
         }
         
         .detail-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+            display: block;
         }
         
         .back-btn {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 24px;
-            height: 24px;
+            top: 16px;
+            left: 16px;
+            width: 32px;
+            height: 32px;
             background: #6b8e23;
             color: white;
             border-radius: 50%;
@@ -432,10 +469,18 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: 3px 3px 6px #5a7120, -3px -3px 6px #7cab26;
+            border: 1px solid #000;
         }
         
         .back-btn:active {
             box-shadow: inset 3px 3px 6px #5a7120, inset -3px -3px 6px #7cab26;
+        }
+        
+        .detail-content {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .detail-name-price {
@@ -466,9 +511,8 @@
             padding: 12px;
             border-radius: 8px;
             margin-bottom: 16px;
-            min-height: 60px;
-            width: 100%;
-            overflow-y: visible;
+            flex: 1;
+            overflow-y: auto;
             font-size: 14px;
             line-height: 1.4;
             box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
@@ -479,17 +523,16 @@
             color: white;
             border: none;
             border-radius: 8px;
-            padding: 16px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            width: 380px;
+            width: 100%;
             height: 56px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            margin: 0 auto 8px; 
+            margin-bottom: 16px;
             box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
         }
         
@@ -501,12 +544,13 @@
             display: none;
             align-items: center;
             justify-content: space-between;
-            width: 380px;
+            width: 100%;
             height: 56px;
-            background: #6b8e23; 
+            background: #6b8e23;
             border-radius: 8px;
-            margin: 0 auto 8px; 
+            margin-bottom: 16px;
             box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+            padding: 0 16px;
         }
         
         .detail-quantity-btn {
@@ -518,19 +562,17 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 600;
-            color: white; 
-        }
-        
-        .detail-quantity-btn:active {
-            box-shadow: inset 5px 5px 10px #5a7120, inset -5px -5px 10px #7cab26;
+            color: white;
         }
         
         .detail-quantity-value {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 500;
-            color: white; 
+            color: white;
+            background: none;
+            padding: 0 16px;
         }
         
         .overlay {
@@ -555,47 +597,6 @@
             grid-column: 1 / -1;
         }
         
-        @media (max-width: 480px) {
-            body {
-                padding: 16px;
-                align-items: center;
-            }
-            
-            .header {
-                width: 100%;
-                max-width: 412px;
-            }
-            
-            .search-container {
-                width: 100%;
-                max-width: 380px;
-            }
-            
-            .menu-grid {
-                grid-template-columns: 1fr;
-                justify-items: center;
-            }
-            
-            .filters {
-                justify-content: center;
-            }
-            
-            .cart-summary {
-                width: calc(100% - 32px);
-                max-width: 380px;
-            }
-            
-            .food-detail {
-                width: 100%;
-                max-width: 412px;
-            }
-            
-            .detail-add-btn, .detail-quantity-controls {
-                width: 100%;
-                max-width: 380px;
-            }
-        }
-        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -603,6 +604,45 @@
         
         .menu-item {
             animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Media query for very small devices */
+        @media (max-width: 350px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+            
+            .header-btn {
+                width: 70px;
+                font-size: 11px;
+            }
+            
+            .filter-btn {
+                width: 70px;
+            }
+            
+            .filter-text {
+                font-size: 11px;
+            }
+            
+            .add-btn, .quantity-controls {
+                width: 60px;
+                height: 22px;
+            }
+            
+            .detail-add-btn, .detail-quantity-controls {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .food-detail {
+                height: 100vh;
+            }
+            
+            .detail-image-container {
+                height: 35vh;
+            }
         }
     </style>
 </head>
@@ -612,11 +652,14 @@
 
     <!-- Main View -->
     <div class="main-view">
-        <!-- Header -->
+        <!-- Header with 4 equal spaces -->
         <header class="header">
             <div class="logo-container">
                 <div class="logo">LOGO</div>
             </div>
+            
+            <!-- Empty space (space 2) -->
+            <div class="header-space"></div>
             
             <div class="header-buttons">
                 <div class="header-btn call-waiter">
@@ -624,8 +667,8 @@
                     <span class="call-waiter">Call Waiter</span>
                 </div>
                 <div class="header-btn table">
-                   <img src="table.png" alt="Table Icon" style="width:20px; height:20px;">
-                   <span>1418</span>
+                 <img src="table.png" alt="Table Icon" style="height: 24px; width: auto;" />
+                 <span>1418</span>
                 </div>
             </div>
         </header>
@@ -636,7 +679,7 @@
             <input type="text" placeholder="Search Food Name" id="search-input">
         </div>
 
-        <!-- Filter Buttons -->
+        <!-- Filter Buttons aligned with header -->
         <div class="filters">
             <button class="filter-btn veg" data-filter="veg">
                 <div class="veg-indicator">
@@ -657,10 +700,9 @@
             <!-- Food items will be dynamically inserted here -->
         </div>
 
-        <!-- Cart Summary - Changed to View Plate -->
+        <!-- Cart Summary -->
         <div class="cart-summary" id="cart-summary">
             <div class="cart-items">
-                <!-- Changed to trolley icon -->
                 <i class="fas fa-concierge-bell"></i>
                 <span>Items added: <span id="cart-count">0</span></span>
             </div>
@@ -677,26 +719,28 @@
             </div>
         </div>
         
-        <div class="detail-name-price">
-            <div class="detail-name-container">
-                <div class="food-type veg-type" id="detail-type">
-                    <div class="type-indicator"></div>
-                    <div class="type-dot"></div>
+        <div class="detail-content">
+            <div class="detail-name-price">
+                <div class="detail-name-container">
+                    <div class="food-type veg-type" id="detail-type">
+                        <div class="type-indicator"></div>
+                        <div class="type-dot"></div>
+                    </div>
+                    <div class="detail-name" id="detail-name">Food Name</div>
                 </div>
-                <div class="detail-name" id="detail-name">Food Name</div>
+                <div class="detail-price" id="detail-price">₹180</div>
             </div>
-            <div class="detail-price" id="detail-price">₹180</div>
-        </div>
-        
-        <div class="detail-description" id="detail-description">
-            This is a delicious food item with fresh ingredients and authentic flavors that will satisfy your taste buds.
-        </div>
-        
-        <button class="detail-add-btn" id="detail-add-btn">ADD TO CART</button>
-        <div class="detail-quantity-controls" id="detail-quantity-controls">
-            <button class="detail-quantity-btn" id="detail-minus-btn">-</button>
-            <span class="detail-quantity-value" id="detail-quantity-value">1</span>
-            <button class="detail-quantity-btn" id="detail-plus-btn">+</button>
+            
+            <div class="detail-description" id="detail-description">
+                This is a delicious food item with fresh ingredients and authentic flavors that will satisfy your taste buds.
+            </div>
+            
+            <button class="detail-add-btn" id="detail-add-btn">ADD TO CART</button>
+            <div class="detail-quantity-controls" id="detail-quantity-controls">
+                <button class="detail-quantity-btn" id="detail-minus-btn">-</button>
+                <span class="detail-quantity-value" id="detail-quantity-value">1</span>
+                <button class="detail-quantity-btn" id="detail-plus-btn">+</button>
+            </div>
         </div>
     </div>
 
@@ -763,7 +807,6 @@
         // DOM Elements
         const menuGrid = document.getElementById('menu-grid');
         const searchInput = document.getElementById('search-input');
-        const searchContainer = document.getElementById('search-container');
         const filterButtons = document.querySelectorAll('.filter-btn');
         const cartCount = document.getElementById('cart-count');
         const cartSummary = document.getElementById('cart-summary');
@@ -827,9 +870,9 @@
                             <div class="food-price">₹${item.price}</div>
                             ${quantity > 0 ? 
                                 `<div class="quantity-controls" data-id="${item.id}">
-                                    <button class="quantity-btn">-</button>
+                                    <button class="quantity-btn minus-btn">-</button>
                                     <span class="quantity-value">${quantity}</span>
-                                    <button class="quantity-btn">+</button>
+                                    <button class="quantity-btn plus-btn">+</button>
                                 </div>` : 
                                 `<button class="add-btn" data-id="${item.id}">ADD</button>`
                             }
@@ -858,9 +901,7 @@
                         currentFilter = "all";
                     } else {
                         filterButtons.forEach(btn => btn.classList.remove('active'));
-                        
                         this.classList.add('active');
-                        
                         currentFilter = filter;
                     }
                     
@@ -874,6 +915,8 @@
             
             backBtn.addEventListener('click', function() {
                 hideFoodDetail();
+                // Refresh the menu items to reflect any changes
+                renderFoodItems(foodItems);
             });
             
             detailAddBtn.addEventListener('click', function() {
@@ -885,6 +928,7 @@
                 if (detailQuantity > 1) {
                     detailQuantity--;
                     detailQuantityValue.textContent = detailQuantity;
+                    updateCartItemQuantity(currentDetailItemId, detailQuantity);
                 } else if (detailQuantity === 1) {
                     removeFromCart(currentDetailItemId);
                     updateDetailView(currentDetailItemId);
@@ -894,45 +938,52 @@
             detailPlusBtn.addEventListener('click', function() {
                 detailQuantity++;
                 detailQuantityValue.textContent = detailQuantity;
+                updateCartItemQuantity(currentDetailItemId, detailQuantity);
             });
             
             overlay.addEventListener('click', function() {
                 hideFoodDetail();
+                // Refresh the menu items to reflect any changes
+                renderFoodItems(foodItems);
             });
         }
         
         function attachMenuEventListeners() {
+            // Add button listeners
             const addButtons = document.querySelectorAll('.add-btn');
             addButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
                     const itemId = parseInt(this.dataset.id);
                     addToCart(itemId, 1);
                     e.stopPropagation();
-                    
                     updateItemButton(itemId);
                 });
             });
             
-            const quantityControls = document.querySelectorAll('.quantity-controls');
-            quantityControls.forEach(control => {
-                const buttons = control.querySelectorAll('.quantity-btn');
-                const itemId = parseInt(control.dataset.id);
-                
-                buttons[0].addEventListener('click', function(e) {
+            // Quantity control listeners
+            const minusButtons = document.querySelectorAll('.minus-btn');
+            minusButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const control = this.parentElement;
+                    const itemId = parseInt(control.dataset.id);
                     decrementCartItem(itemId);
                     e.stopPropagation();
-                    
-                    updateItemButton(itemId);
-                });
-                
-                buttons[1].addEventListener('click', function(e) {
-                    incrementCartItem(itemId);
-                    e.stopPropagation();
-                    
                     updateItemButton(itemId);
                 });
             });
             
+            const plusButtons = document.querySelectorAll('.plus-btn');
+            plusButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const control = this.parentElement;
+                    const itemId = parseInt(control.dataset.id);
+                    incrementCartItem(itemId);
+                    e.stopPropagation();
+                    updateItemButton(itemId);
+                });
+            });
+            
+            // Menu item click listeners
             const menuItems = document.querySelectorAll('.menu-item');
             menuItems.forEach(item => {
                 item.addEventListener('click', function() {
@@ -955,22 +1006,27 @@
                 actionContainer.innerHTML = `
                     <div class="food-price">₹${foodItems.find(item => item.id === itemId).price}</div>
                     <div class="quantity-controls" data-id="${itemId}">
-                        <button class="quantity-btn">-</button>
+                        <button class="quantity-btn minus-btn">-</button>
                         <span class="quantity-value">${quantity}</span>
-                        <button class="quantity-btn">+</button>
+                        <button class="quantity-btn plus-btn">+</button>
                     </div>
                 `;
                 
-                const control = actionContainer.querySelector('.quantity-controls');
-                const buttons = control.querySelectorAll('.quantity-btn');
+                // Reattach event listeners to the new buttons
+                const minusBtn = actionContainer.querySelector('.minus-btn');
+                const plusBtn = actionContainer.querySelector('.plus-btn');
                 
-                buttons[0].addEventListener('click', function(e) {
+                minusBtn.addEventListener('click', function(e) {
+                    const control = this.parentElement;
+                    const itemId = parseInt(control.dataset.id);
                     decrementCartItem(itemId);
                     e.stopPropagation();
                     updateItemButton(itemId);
                 });
                 
-                buttons[1].addEventListener('click', function(e) {
+                plusBtn.addEventListener('click', function(e) {
+                    const control = this.parentElement;
+                    const itemId = parseInt(control.dataset.id);
                     incrementCartItem(itemId);
                     e.stopPropagation();
                     updateItemButton(itemId);
@@ -1005,6 +1061,7 @@
             detailDescription.textContent = item.description;
             detailQuantityValue.textContent = detailQuantity;
             
+            // Update the type indicator
             detailType.className = `food-type ${item.type}-type`;
             detailType.innerHTML = `
                 <div class="type-indicator"></div>
@@ -1038,7 +1095,6 @@
         function hideFoodDetail() {
             overlay.classList.remove('active');
             foodDetail.classList.remove('active');
-            
             document.body.style.overflow = 'auto';
         }
         
@@ -1055,9 +1111,15 @@
             }
             
             updateCartUI();
+            updateDetailView(itemId);
+        }
+        
+        function updateCartItemQuantity(itemId, quantity) {
+            const itemIndex = cart.findIndex(item => item.id === itemId);
             
-            if (currentDetailItemId === itemId) {
-                updateDetailView(itemId);
+            if (itemIndex !== -1) {
+                cart[itemIndex].quantity = quantity;
+                updateCartUI();
             }
         }
         
@@ -1069,10 +1131,6 @@
             }
             
             updateCartUI();
-            
-            if (currentDetailItemId === itemId) {
-                updateDetailView(itemId);
-            }
         }
         
         function incrementCartItem(itemId) {
@@ -1081,10 +1139,6 @@
             if (itemIndex !== -1) {
                 cart[itemIndex].quantity++;
                 updateCartUI();
-                
-                if (currentDetailItemId === itemId) {
-                    updateDetailView(itemId);
-                }
             }
         }
         
@@ -1099,22 +1153,16 @@
                 }
                 
                 updateCartUI();
-                
-                if (currentDetailItemId === itemId) {
-                    updateDetailView(itemId);
-                }
             }
         }
 
-        
         function calculateTotal() {
             return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
         }
 
-                function updateCartUI() {
+        function updateCartUI() {
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             cartCount.textContent = totalItems;
-            
             
             if (totalItems > 0) {
                 cartSummary.classList.add('visible');

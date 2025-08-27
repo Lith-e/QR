@@ -93,7 +93,19 @@
             font-size: 3vw;
         }
         
-        .header-btn:active {
+        /* Call waiter button with green background */
+        .header-btn.call-waiter {
+            background: #6b8e23;
+            color: white;
+        }
+        
+        /* Call waiter button active state with outer shadow */
+        .header-btn.call-waiter:active {
+            box-shadow: 0 0 1vw #6b8e23, 1.5vw 1.5vw 3vw #d1d1d1, -1.5vw -1.5vw 3vw #ffffff;
+            background: #5a7120;
+        }
+        
+        .header-btn.table:active {
             box-shadow: inset 1.5vw 1.5vw 3vw #d1d1d1, inset -1.5vw -1.5vw 3vw #ffffff;
         }
         
@@ -143,6 +155,31 @@
             transition: all 0.3s ease;
             box-shadow: 1.5vw 1.5vw 3vw #d1d1d1, 1.5vw 1.5vw 3vw #ffffff;
             border: 0.3vw solid #000;
+            position: relative;
+        }
+        
+        /* Close button for filters */
+        .filter-close {
+            position: absolute;
+            top: -1.5vw;
+            right: -1.5vw;
+            width: 5vw;
+            height: 5vw;
+            background: #d40000;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5vw;
+            font-weight: bold;
+            display: none;
+            z-index: 5;
+            box-shadow: 0 0 0.5vw rgba(0,0,0,0.3);
+        }
+        
+        .filter-btn.active .filter-close {
+            display: flex;
         }
         
         /* Veg filter aligned with logo (space 1) */
@@ -321,6 +358,7 @@
             font-size: 4vw;
         }
         
+        /* Add button with 2px extra height */
         .add-btn {
             background: #6b8e23;
             color: #ffffff;
@@ -331,7 +369,7 @@
             border: none;
             transition: all 0.3s ease;
             width: 16.75vw;
-            height: 6vw;
+            height: 8vw; /* Increased by 2px equivalent */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -347,7 +385,7 @@
             align-items: center;
             justify-content: space-between;
             width: 16.75vw;
-            height: 6vw;
+            height: 8vw; /* Increased by 2px equivalent */
             background: #6b8e23;
             border-radius: 0.75vw;
             padding: 0 1vw;
@@ -454,6 +492,7 @@
             display: block;
         }
         
+        /* Improved back button with proper arrow */
         .back-btn {
             position: absolute;
             top: 4vw;
@@ -467,12 +506,16 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0.75vw 0.75vw 1.5vw #5a7120, -0.75vw -0.75vw 1.5vw #7cab26;
             border: 0.3vw solid #000;
+            font-size: 4vw;
+            font-weight: bold;
+            box-shadow: 0.5vw 0.5vw 1vw rgba(0,0,0,0.2);
         }
         
         .back-btn:active {
-            box-shadow: inset 0.75vw 0.75vw 1.5vw #5a7120, inset -0.75vw -0.75vw 1.5vw #7cab26;
+            background: #5a7120;
+            transform: translateY(0.5vw);
+            box-shadow: 0.25vw 0.25vw 0.5vw rgba(0,0,0,0.2);
         }
         
         .detail-content {
@@ -526,7 +569,7 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            height: 14vw;
+            height: 16vw; /* Increased by 2px equivalent */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -544,7 +587,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            height: 14vw;
+            height: 16vw; /* Increased by 2px equivalent */
             background: #6b8e23;
             border-radius: 2vw;
             margin-bottom: 4vw;
@@ -622,7 +665,7 @@
             
             .add-btn, .quantity-controls {
                 width: 15vw;
-                height: 5.5vw;
+                height: 7vw; /* Adjusted for small devices */
             }
             
             .detail-add-btn, .detail-quantity-controls {
@@ -681,7 +724,12 @@
                 box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
             }
             
-            .header-btn:active {
+            .header-btn.call-waiter:active {
+                box-shadow: 0 0 4px #6b8e23, 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+                background: #5a7120;
+            }
+            
+            .header-btn.table:active {
                 box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
             }
             
@@ -711,6 +759,14 @@
             
             .filter-btn.active {
                 box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
+            }
+            
+            .filter-close {
+                width: 16px;
+                height: 16px;
+                top: -6px;
+                right: -6px;
+                font-size: 12px;
             }
             
             .veg-indicator {
@@ -804,7 +860,7 @@
             
             .add-btn {
                 width: 67px;
-                height: 24px;
+                height: 28px; /* Increased by 2px */
                 border-radius: 3px;
                 font-size: 12px;
                 box-shadow: 3px 3px 6px #d1d1d1, -3px -3px 6px #ffffff;
@@ -816,7 +872,7 @@
             
             .quantity-controls {
                 width: 67px;
-                height: 24px;
+                height: 28px; /* Increased by 2px */
                 border-radius: 3px;
                 padding: 0 4px;
             }
@@ -858,11 +914,14 @@
                 top: 16px;
                 left: 16px;
                 border-width: 1px;
-                box-shadow: 3px 3px 6px #5a7120, -3px -3px 6px #7cab26;
+                font-size: 16px;
+                box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
             }
             
             .back-btn:active {
-                box-shadow: inset 3px 3px 6px #5a7120, inset -3px -3px 6px #7cab26;
+                background: #5a7120;
+                transform: translateY(2px);
+                box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
             }
             
             .detail-content {
@@ -894,7 +953,7 @@
             }
             
             .detail-add-btn {
-                height: 56px;
+                height: 60px; /* Increased by 2px */
                 border-radius: 8px;
                 font-size: 16px;
                 margin-bottom: 16px;
@@ -906,7 +965,7 @@
             }
             
             .detail-quantity-controls {
-                height: 56px;
+                height: 60px; /* Increased by 2px */
                 border-radius: 8px;
                 margin-bottom: 16px;
                 box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
@@ -922,7 +981,6 @@
                 font-size: 20px;
                 padding: 0 16px;
             }
-            
             @keyframes fadeIn {
                 from { opacity: 0; transform: translateY(20px); }
                 to { opacity: 1; transform: translateY(0); }
@@ -950,10 +1008,9 @@
                     <i class="fas fa-bell"></i>
                     <span class="call-waiter">Call Waiter</span>
                 </div>
-                <div class="header-btn table">
-                   <i class="fas fa-utensils"></i>
-                   <span>1418</span>
-                </div>
+                <div class="header-btn table"><img src="table.png" alt="Table Icon" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> <span>1418</span></div>
+
+
             </div>
         </header>
 
@@ -966,12 +1023,14 @@
         <!-- Filter Buttons aligned with header -->
         <div class="filters">
             <button class="filter-btn veg" data-filter="veg">
+                <div class="filter-close">×</div>
                 <div class="veg-indicator">
                     <div class="veg-dot"></div>
                 </div>
                 <span class="filter-text">Veg</span>
             </button>
             <button class="filter-btn non-veg" data-filter="non-veg">
+                <div class="filter-close">×</div>
                 <div class="non-veg-indicator">
                     <div class="non-veg-dot"></div>
                 </div>
@@ -998,8 +1057,11 @@
     <div class="food-detail" id="food-detail">
         <div class="detail-image-container">
             <img src="" alt="Food Image" class="detail-image" id="detail-image">
-            <div class="back-btn" id="back-btn">
-                <i class="fas fa-arrow-left"></i>
+            <div class="back-btn" id="back-btn" style="background:white; border:1px solid #ccc; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+  <img src="arrow.png" alt="Back Arrow" style="width:16px; height:16px;">
+</div>
+
+                ← <!-- Improved arrow symbol -->
             </div>
         </div>
         
@@ -1108,6 +1170,7 @@
         const detailQuantityValue = document.getElementById('detail-quantity-value');
         const detailType = document.getElementById('detail-type');
         const overlay = document.getElementById('overlay');
+        const filterCloses = document.querySelectorAll('.filter-close');
 
         // Initialize the page
         function init() {
@@ -1177,16 +1240,23 @@
             });
             
             filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const filter = this.dataset.filter;
-                    
-                    if (this.classList.contains('active') && currentFilter === filter) {
+                button.addEventListener('click', function(e) {
+                    // Check if the click was on the close button
+                    if (e.target.classList.contains('filter-close') || 
+                        e.target.parentElement.classList.contains('filter-close')) {
                         this.classList.remove('active');
                         currentFilter = "all";
                     } else {
-                        filterButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                        currentFilter = filter;
+                        const filter = this.dataset.filter;
+                        
+                        if (this.classList.contains('active') && currentFilter === filter) {
+                            this.classList.remove('active');
+                            currentFilter = "all";
+                        } else {
+                            filterButtons.forEach(btn => btn.classList.remove('active'));
+                            this.classList.add('active');
+                            currentFilter = filter;
+                        }
                     }
                     
                     renderFoodItems(foodItems);

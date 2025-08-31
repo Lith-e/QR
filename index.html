@@ -16,81 +16,80 @@
         }
         
         body {
-            background: #f0f0f0;
+            background: #FAFAF8;
             color: #333333;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding: 4vw;
+            padding: 16px;
             margin: 0 auto;
             position: relative;
             overflow-x: hidden;
-            border: 0.5vw solid #000;
+            border: 2px solid #e9ecef;
             max-width: 100%;
             width: 100%;
         }
         
         /* Header with 4 equal spaces */
         .header {
-            background: #f0f0f0;
+            background: #f8f9fa;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 4vw;
+            gap: 16px;
             align-items: center;
-            height: 22vw;
-            margin-bottom: 4vw;
+            height: 88px;
+            margin-bottom: 16px;
             position: relative;
             width: 100%;
         }
         
         .logo-container {
-            background: #ffffff;
-            border-radius: 2vw;
+            background: #FAFAF8;
+            border-radius: 8px;
             width: 100%;
-            height: 10vw;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 1.5vw 1.5vw 3vw #d1d1d1, -1.5vw -1.5vw 3vw #ffffff;
-            border: 0.3vw solid #000;
+            border: 1px solid #dee2e6;
             grid-column: 1;
         }
         
         .logo {
-            font-size: 5vw;
+            font-size: 20px;
             font-weight: 700;
+            color: #6b8e23;
         }
         
         /* Empty space in header (space 2) */
         .header-space {
             grid-column: 2;
             width: 100%;
-            height: 10vw;
+            height: 40px;
         }
         
         .header-buttons {
             display: flex;
-            gap: 4vw;
+            gap: 16px;
             grid-column: 3 / span 2;
         }
         
         .header-btn {
-            background: #f0f0f0;
+            background: #6b8e23;
             color: #6b8e23;
-            border-radius: 2vw;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 500;
             cursor: pointer;
             width: 100%;
-            height: 10vw;
-            gap: 1.5vw;
-            padding: 0 2.5vw;
-            box-shadow: 1.5vw 1.5vw 3vw #d1d1d1, -1.5vw -1.5vw 3vw #ffffff;
-            border: 0.3vw solid #000;
+            height: 40px;
+            gap: 6px;
+            padding: 0 10px;
+            border: 1px solid #dee2e6;
             transition: all 0.3s ease;
-            font-size: 3vw;
+            font-size: 12px;
         }
         
         /* Call waiter button with green background */
@@ -99,83 +98,90 @@
             color: white;
         }
         
-        /* Call waiter button active state with outer shadow */
         .header-btn.call-waiter:active {
-            box-shadow: 0 0 1vw #6b8e23, 1.5vw 1.5vw 3vw #d1d1d1, -1.5vw -1.5vw 3vw #ffffff;
             background: #5a7120;
         }
         
         .header-btn.table:active {
-            box-shadow: inset 1.5vw 1.5vw 3vw #d1d1d1, inset -1.5vw -1.5vw 3vw #ffffff;
+            background: #6b8e23;
         }
         
-        /* Search bar */
+        /* Search bar - keeping the shadow as requested */
         .search-container {
-            background: #ffffff;
-            border-radius: 2vw;
-            padding: 3vw 4vw;
+            background: #FAFAF8;
+            border-radius: 8px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 3vw;
-            margin-bottom: 4vw;
+            gap: 12px;
+            margin-bottom: 16px;
             width: 100%;
-            height: 12vw;
-            border: 0.3vw solid #d1d1d1;
+            height: 48px;
+            border: 1px solid #6b8e23;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(107, 142, 35, 0.2);
         }
         
         .search-container input {
             flex: 1;
             border: none;
             outline: none;
-            font-size: 4vw;
+            font-size: 16px;
             background: transparent;
-            color: rgba(51, 51, 51, 0.49);
+            color: rgba(51, 51, 51, 0.7);
         }
         
         /* Filters aligned with header */
         .filters {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 4vw;
-            margin-bottom: 6vw;
+            gap: 16px;
+            margin-bottom: 24px;
             width: 100%;
         }
         
         .filter-btn {
-            background: #f0f0f0;
-            border-radius: 2vw;
+            background: #FAFAF8;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             cursor: pointer;
             width: 100%;
-            height: 8vw;
+            height: 32px;
             justify-content: center;
-            gap: 2vw;
+            gap: 8px;
             transition: all 0.3s ease;
-            box-shadow: 1.5vw 1.5vw 3vw #d1d1d1, 1.5vw 1.5vw 3vw #ffffff;
-            border: 0.3vw solid #000;
+            border: 1px solid #1B2828;
             position: relative;
+        }
+        
+        /* Veg filter specific size */
+        .filter-btn.veg {
+            width: 83px;
+        }
+        
+        /* Non-veg filter specific size */
+        .filter-btn.non-veg {
+            width: 86px;
         }
         
         /* Close button for filters */
         .filter-close {
             position: absolute;
-            top: -1.5vw;
-            right: -1.5vw;
-            width: 5vw;
-            height: 5vw;
+            top: -6px;
+            right: -6px;
+            width: 16px;
+            height: 16px;
             background: #d40000;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5vw;
+            font-size: 12px;
             font-weight: bold;
             display: none;
             z-index: 5;
-            box-shadow: 0 0 0.5vw rgba(0,0,0,0.3);
         }
         
         .filter-btn.active .filter-close {
@@ -192,100 +198,104 @@
             grid-column: 2;
         }
         
-        .filter-btn.active {
-            box-shadow: inset 1.5vw 1.5vw 3vw #d1d1d1, inset -1.5vw -1.5vw 3vw #ffffff;
-        }
-        
+        /* Lighter color for active filters */
         .filter-btn.veg.active {
-            background-color: #e8f5e9;
+            background-color: #F7FFE8;
+            border-color: #6B8E23;
         }
         
         .filter-btn.non-veg.active {
-            background-color: #ffebee;
+            background-color: #FFEBEB;
+            border-color: #D40000;
         }
         
         .veg-indicator {
-            width: 4vw;
-            height: 4vw;
-            border: 0.3vw solid #008000;
-            border-radius: 0.5vw;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #6B8E23;
+            border-radius: 2px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: white;
+            background-color: #FAFAF8;
         }
         
         .veg-dot {
-            width: 2vw;
-            height: 2vw;
+            width: 8px;
+            height: 8px;
             background: #008000;
             border-radius: 50%;
         }
         
         .non-veg-indicator {
-            width: 4vw;
-            height: 4vw;
-            border: 0.3vw solid #d40000;
-            border-radius: 0.5vw;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #D40000;
+            border-radius: 2px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: white;
+            background-color: #FAFAF8;
         }
         
         .non-veg-dot {
-            width: 2vw;
-            height: 2vw;
-            background: #d40000;
+            width: 8px;
+            height: 8px;
+            background: #D40000;
             border-radius: 50%;
         }
         
         .filter-text {
             white-space: nowrap;
-            font-size: 3vw;
+            font-size: 12px;
             font-weight: 500;
+        }
+        
+        /* Active state text color changes */
+        .filter-btn.active .filter-text {
+            color: black;
         }
         
         /* Menu grid with exact dimensions */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4vw;
-            margin-bottom: 20vw;
+            gap: 16px;
+            margin-bottom: 80px;
             width: 100%;
             justify-content: center;
         }
         
         .menu-item {
-            background: #f0f0f0;
-            border-radius: 2vw;
+            background: #FAFAF8;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 1.5vw 1.5vw 3vw #d1d1d1, -1.5vw -1.5vw 3vw #ffffff;
-            height: 62.5vw;
+            height: 256px;
             width: 100%;
             cursor: pointer;
             transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
         }
         
         .menu-item:active {
-            box-shadow: inset 1.5vw 1.5vw 3vw #d1d1d1, inset -1.5vw -1.5vw 3vw #ffffff;
+            background: #f8f9fa;
         }
         
         .food-image {
             width: 100%;
-            height: 38vw;
+            height: 152px;
             object-fit: cover;
             display: block;
-            border-radius: 2vw 2vw 0 0;
+            border-radius: 8px 8px 0 0;
         }
         
         .food-details {
-            padding: 2vw;
+            padding: 8px;
             display: flex;
             flex-direction: column;
-            gap: 10vw;
+            gap: 40px;
             width: 100%;
-            height: 20.75vw;
+            height: 83px;
         }
         
         .food-name-type {
@@ -293,12 +303,12 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            height: 4.75vw;
+            height: 19px;
         }
         
         .food-name {
             font-weight: 500;
-            font-size: 4vw;
+            font-size: 16px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -306,43 +316,43 @@
         }
         
         .food-type {
-            width: 4vw;
-            height: 4vw;
+            width: 16px;
+            height: 16px;
             position: relative;
         }
         
         .type-indicator {
-            width: 4vw;
-            height: 4vw;
-            border-radius: 0.5vw;
-            border: 0.15vw solid;
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+            border: 1px solid;
             position: absolute;
-            background-color: white;
+            background-color: #FAFAF8;
         }
         
         .type-dot {
-            width: 2vw;
-            height: 2vw;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             position: absolute;
-            top: 1vw;
-            left: 1vw;
+            top: 4px;
+            left: 4px;
         }
         
         .veg-type .type-indicator {
-            border-color: #008000;
+            border-color: #6B8E23;
         }
         
         .veg-type .type-dot {
-            background: #008000;
+            background: #6B8E23;
         }
         
         .non-veg-type .type-indicator {
-            border-color: #d40000;
+            border-color: #D40000;
         }
         
         .non-veg-type .type-dot {
-            background: #d40000;
+            background: #D40000;
         }
         
         .food-price-action {
@@ -350,51 +360,52 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            height: 6vw;
+            height: 24px;
         }
         
         .food-price {
             font-weight: 600;
-            font-size: 4vw;
+            font-size: 16px;
         }
         
-        /* Add button with 2px extra height */
+        /* Add button */
         .add-btn {
             background: #6b8e23;
             color: #ffffff;
-            border-radius: 0.75vw;
-            font-size: 3vw;
+            border-radius: 3px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             border: none;
             transition: all 0.3s ease;
-            width: 16.75vw;
-            height: 8vw; /* Increased by 2px equivalent */
+            width: 67px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0.75vw 0.75vw 1.5vw #d1d1d1, -0.75vw -0.75vw 1.5vw #ffffff;
+            margin: 8px 0;
         }
         
         .add-btn:active {
-            box-shadow: inset 0.75vw 0.75vw 1.5vw #5a7120, inset -0.75vw -0.75vw 1.5vw #7cab26;
+            background: #5a7120;
         }
         
         .quantity-controls {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 16.75vw;
-            height: 8vw; /* Increased by 2px equivalent */
+            width: 67px;
+            height: 28px;
             background: #6b8e23;
-            border-radius: 0.75vw;
-            padding: 0 1vw;
+            border-radius: 3px;
+            padding: 0 4px;
+            margin: 8px 0;
         }
         
         .quantity-btn {
             background: none;
             border: none;
-            width: 5vw;
+            width: 20px;
             height: 100%;
             display: flex;
             align-items: center;
@@ -402,35 +413,34 @@
             cursor: pointer;
             font-weight: 600;
             color: white;
-            font-size: 3.5vw;
+            font-size: 14px;
         }
         
         .quantity-value {
-            font-size: 3vw;
+            font-size: 12px;
             font-weight: 500;
             color: white;
             background: none;
-            padding: 0 1vw;
+            padding: 0 4px;
         }
         
         /* Cart summary */
         .cart-summary {
             background: #6b8e23;
             color: white;
-            border-radius: 2vw;
-            padding: 4vw;
+            border-radius: 8px;
+            padding: 16px;
             display: none;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            height: 14vw;
+            height: 56px;
             position: fixed;
-            bottom: 5vw;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 1.5vw 1.5vw 3vw #d1d1d1, -1.5vw -1.5vw 3vw #ffffff;
             z-index: 10;
-            max-width: 92vw;
+            max-width: 368px;
         }
         
         .cart-summary.visible {
@@ -441,7 +451,7 @@
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 2vw;
+            gap: 8px;
         }
         
         .view-cart-btn {
@@ -452,7 +462,7 @@
             cursor: pointer;
         }
         
-        /* Food detail view - Fixed dimensions 412x480 */
+        /* Food detail view */
         .food-detail {
             display: none;
             position: fixed;
@@ -460,16 +470,16 @@
             left: 50%;
             transform: translateX(-50%) translateY(100%);
             width: 100%;
-            height: 120vw;
-            background: #f0f0f0;
+            height: 480px;
+            background: #f8f9fa;
             z-index: 20;
             padding: 0;
-            border-top-left-radius: 4vw;
-            border-top-right-radius: 4vw;
-            box-shadow: 0 -1vw 5vw rgba(0, 0, 0, 0.15);
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
             transition: transform 0.4s ease;
             max-width: 100%;
             overflow: hidden;
+            
         }
         
         .food-detail.active {
@@ -481,7 +491,7 @@
         .detail-image-container {
             position: relative;
             width: 100%;
-            height: 60vw;
+            height: 240px;
             flex-shrink: 0;
         }
         
@@ -492,34 +502,30 @@
             display: block;
         }
         
-        /* Improved back button with proper arrow */
+        /* Back button */
         .back-btn {
             position: absolute;
-            top: 4vw;
-            left: 4vw;
-            width: 8vw;
-            height: 8vw;
-            background: #6b8e23;
-            color: white;
+            top: 16px;
+            left: 16px;
+            width: 32px;
+            height: 32px;
+            background: #E4E6E3;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            border: 0.3vw solid #000;
-            font-size: 4vw;
+       
+            font-size: 16px;
             font-weight: bold;
-            box-shadow: 0.5vw 0.5vw 1vw rgba(0,0,0,0.2);
         }
         
         .back-btn:active {
-            background: #5a7120;
-            transform: translateY(0.5vw);
-            box-shadow: 0.25vw 0.25vw 0.5vw rgba(0,0,0,0.2);
+            background: #9A9E93;
         }
         
         .detail-content {
-            padding: 4vw;
+            padding: 16px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -529,57 +535,56 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3vw;
+            margin-bottom: 12px;
         }
         
         .detail-name-container {
             display: flex;
             align-items: center;
-            gap: 2vw;
+            gap: 8px;
         }
         
         .detail-name {
-            font-size: 4.5vw;
+            font-size: 18px;
             font-weight: 600;
         }
         
         .detail-price {
-            font-size: 4.5vw;
+            font-size: 18px;
             font-weight: 600;
         }
         
         .detail-description {
-            background: #f0f0f0;
-            padding: 3vw;
-            border-radius: 2vw;
-            margin-bottom: 4vw;
+            background: #FAFAF8;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
             flex: 1;
             overflow-y: auto;
-            font-size: 3.5vw;
+            font-size: 14px;
             line-height: 1.4;
-            box-shadow: inset 1.5vw 1.5vw 3vw #d1d1d1, inset -1.5vw -1.5vw 3vw #ffffff;
+            border: 1px solid #e9ecef;
         }
         
         .detail-add-btn {
             background: #6b8e23;
             color: white;
             border: none;
-            border-radius: 2vw;
-            font-size: 4vw;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            height: 16vw; /* Increased by 2px equivalent */
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            margin-bottom: 4vw;
-            box-shadow: 1.5vw 1.5vw 3vw #d1d1d1, -1.5vw -1.5vw 3vw #ffffff;
+            margin-bottom: 16px;
         }
         
         .detail-add-btn:active {
-            box-shadow: inset 1.5vw 1.5vw 3vw #5a7120, inset -1.5vw -1.5vw 3vw #7cab26;
+            background: #5a7120;
         }
         
         .detail-quantity-controls {
@@ -587,34 +592,33 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            height: 16vw; /* Increased by 2px equivalent */
+            height: 60px;
             background: #6b8e23;
-            border-radius: 2vw;
-            margin-bottom: 4vw;
-            box-shadow: 1.5vw 1.5vw 3vw #d1d1d1, -1.5vw -1.5vw 3vw #ffffff;
-            padding: 0 4vw;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            padding: 0 16px;
         }
         
         .detail-quantity-btn {
             background: none;
             border: none;
-            width: 14vw;
+            width: 56px;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 6vw;
+            font-size: 24px;
             font-weight: 600;
             color: white;
         }
         
         .detail-quantity-value {
-            font-size: 5vw;
+            font-size: 20px;
             font-weight: 500;
             color: white;
             background: none;
-            padding: 0 4vw;
+            padding: 0 16px;
         }
         
         .overlay {
@@ -634,18 +638,242 @@
         
         .empty-state {
             text-align: center;
-            padding: 10vw 5vw;
+            padding: 40px 20px;
             color: #888;
             grid-column: 1 / -1;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5vw); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .menu-item {
             animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* ORDER SUMMARY PAGE STYLES */
+        .order-summary-view {
+            display: none;
+            flex-direction: column;
+            height: calc(100vh - 32px);
+            position: relative;
+            padding-bottom: 100px; /* Space for fixed footer */
+        }
+
+        .order-summary-container {
+            background: #FAFAF8;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #e9ecef;
+        }
+
+        .order-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 0;
+        }
+
+        .order-item {
+            display: flex;
+            padding: 12px 0;
+            position: relative;
+        }
+
+        .order-item:not(:last-child) {
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .order-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 12px;
+        }
+
+        .order-item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .order-item-type {
+            margin-bottom: 6px;
+        }
+
+        .order-item-name {
+            font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .order-item-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .order-quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 80px;
+            height: 28px;
+            background: #6b8e23;
+            border-radius: 3px;
+            padding: 0 4px;
+        }
+
+        .order-item-price {
+            position: absolute;
+            bottom: 12px;
+            right: 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .phone-input-section {
+            background: #FAFAF8;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #e9ecef;
+        }
+
+        .phone-input-title {
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .phone-input-container {
+            background: #FAFAF8;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            height: 48px;
+            border: 1px solid #6b8e23;
+            box-shadow: 0 2px 8px rgba(107, 142, 35, 0.2);
+        }
+
+        .phone-input-container.invalid {
+            border-color: #D40000;
+        }
+
+        .phone-input-container input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
+        }
+
+        .payment-footer {
+            display: flex;
+            background: #FAFAF8;
+            border-top: 1px solid #e9ecef;
+            padding: 16px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            gap: 16px;
+            z-index: 10;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-options {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 8px;
+        }
+
+        .payment-method-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+
+        .payment-method-label {
+            font-size: 12px;
+            color: #888;
+            margin-right: 8px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .payment-method-label span {
+            text-transform: lowercase;
+        }
+
+        .payment-toggle {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #6b8e23;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .payment-option img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .pay-button-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-left: 8px;
+        }
+
+        .pay-button {
+            background: #6b8e23;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .pay-button:active {
+            background: #5a7120;
+        }
+
+        .back-arrow {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .back-arrow i {
+            margin-right: 8px;
         }
 
         /* Media query for very small devices */
@@ -656,16 +884,16 @@
             }
             
             .header-btn {
-                font-size: 2.8vw;
+                font-size: 11px;
             }
             
             .filter-text {
-                font-size: 2.8vw;
+                font-size: 11px;
             }
             
             .add-btn, .quantity-controls {
-                width: 15vw;
-                height: 7vw; /* Adjusted for small devices */
+                width: 60px;
+                height: 25px;
             }
             
             .detail-add-btn, .detail-quantity-controls {
@@ -678,6 +906,28 @@
             
             .detail-image-container {
                 height: 35vh;
+            }
+
+            /* Order summary adjustments */
+            .order-item {
+                flex-direction: column;
+            }
+            
+            .order-item-image {
+                width: 100%;
+                height: 120px;
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+            
+            .payment-footer {
+                flex-direction: column;
+                padding: 12px;
+            }
+            
+            .payment-options, .pay-button-container {
+                width: 100%;
+                padding: 8px 0;
             }
         }
 
@@ -699,7 +949,6 @@
                 height: 40px;
                 border-radius: 8px;
                 border-width: 1px;
-                box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
             }
             
             .logo {
@@ -721,16 +970,14 @@
                 font-size: 12px;
                 gap: 5px;
                 padding: 0 10px;
-                box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
             }
             
             .header-btn.call-waiter:active {
-                box-shadow: 0 0 4px #6b8e23, 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
                 background: #5a7120;
             }
             
             .header-btn.table:active {
-                box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
+                background: #f1f3f5;
             }
             
             .search-container {
@@ -739,6 +986,7 @@
                 padding: 12px 16px;
                 border-width: 1px;
                 margin-bottom: 16px;
+                box-shadow: 0 2px 8px rgba(107, 142, 35, 0.2);
             }
             
             .search-container input {
@@ -754,11 +1002,6 @@
                 height: 32px;
                 border-radius: 8px;
                 border-width: 1px;
-                box-shadow: 5px 5px 10px #d1d1d1, 5px 5px 10px #ffffff;
-            }
-            
-            .filter-btn.active {
-                box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
             }
             
             .filter-close {
@@ -805,11 +1048,11 @@
             .menu-item {
                 height: 251px;
                 border-radius: 8px;
-                box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+                border-width: 1px;
             }
             
             .menu-item:active {
-                box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
+                background: #f8f9fa;
             }
             
             .food-image {
@@ -840,7 +1083,7 @@
                 width: 16px;
                 height: 16px;
                 border-radius: 2px;
-                border-width: 0.5px;
+                border-width: 1px;
             }
             
             .type-dot {
@@ -860,21 +1103,22 @@
             
             .add-btn {
                 width: 67px;
-                height: 28px; /* Increased by 2px */
+                height: 28px;
                 border-radius: 3px;
                 font-size: 12px;
-                box-shadow: 3px 3px 6px #d1d1d1, -3px -3px 6px #ffffff;
+                margin: 8px 0;
             }
             
             .add-btn:active {
-                box-shadow: inset 3px 3px 6px #5a7120, inset -3px -3px 6px #7cab26;
+                background: #5a7120;
             }
             
             .quantity-controls {
                 width: 67px;
-                height: 28px; /* Increased by 2px */
+                height: 28px;
                 border-radius: 3px;
                 padding: 0 4px;
+                margin: 8px 0;
             }
             
             .quantity-btn {
@@ -893,15 +1137,14 @@
                 padding: 16px;
                 bottom: 20px;
                 max-width: 380px;
-                box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
             }
             
             .food-detail {
                 height: 480px;
                 border-top-left-radius: 16px;
                 border-top-right-radius: 16px;
-                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
                 max-width: 412px;
+                border-width: 1px;
             }
             
             .detail-image-container {
@@ -915,13 +1158,10 @@
                 left: 16px;
                 border-width: 1px;
                 font-size: 16px;
-                box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
             }
             
             .back-btn:active {
-                background: #5a7120;
-                transform: translateY(2px);
-                box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+                background: #f1f3f5;
             }
             
             .detail-content {
@@ -949,26 +1189,24 @@
                 border-radius: 8px;
                 margin-bottom: 16px;
                 font-size: 14px;
-                box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
+                border-width: 1px;
             }
             
             .detail-add-btn {
-                height: 60px; /* Increased by 2px */
+                height: 60px;
                 border-radius: 8px;
                 font-size: 16px;
                 margin-bottom: 16px;
-                box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
             }
             
             .detail-add-btn:active {
-                box-shadow: inset 5px 5px 10px #5a7120, inset -5px -5px 10px #7cab26;
+                background: #5a7120;
             }
             
             .detail-quantity-controls {
-                height: 60px; /* Increased by 2px */
+                height: 60px;
                 border-radius: 8px;
                 margin-bottom: 16px;
-                box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
                 padding: 0 16px;
             }
             
@@ -980,6 +1218,14 @@
             .detail-quantity-value {
                 font-size: 20px;
                 padding: 0 16px;
+            }
+            
+            .payment-footer {
+                max-width: 412px;
+                margin: 0 auto;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 32px);
             }
             
             @keyframes fadeIn {
@@ -994,7 +1240,7 @@
     <div class="overlay" id="overlay"></div>
 
     <!-- Main View -->
-    <div class="main-view">
+    <div class="main-view" id="main-view">
         <!-- Header with 4 equal spaces -->
         <header class="header">
             <div class="logo-container">
@@ -1005,11 +1251,9 @@
             <div class="header-space"></div>
             
             <div class="header-buttons">
-                <div class="header-btn call-waiter">
-                    <i class="fas fa-bell"></i>
-                    <span class="call-waiter">Call Waiter</span>
-                </div>
-                  <div class="header-btn table"><img src="table.png" alt="Table Icon" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> <span>1418</span></div>
+                <div class="header-btn call-waiter"><img src="waiter.png" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> <span class="call-waiter">Call Waiter</span></div>
+                 
+                 <div class="header-btn call-waiter"><img src="table.png" alt="Table Icon" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> <span class="call-waiter">1418</span></div>
             </div>
         </header>
 
@@ -1048,7 +1292,7 @@
                 <i class="fas fa-concierge-bell"></i>
                 <span>Items added: <span id="cart-count">0</span></span>
             </div>
-            <button class="view-cart-btn">View Plate ></button>
+            <button class="view-cart-btn" id="view-cart-btn">View Plate ></button>
         </div>
     </div>
 
@@ -1056,8 +1300,8 @@
     <div class="food-detail" id="food-detail">
         <div class="detail-image-container">
             <img src="" alt="Food Image" class="detail-image" id="detail-image">
-               <div class="back-btn" id="back-btn" style="background:white;  width:24px; height:24px; display:flex; align-items:center; justify-content:center;">
-                <img src="arrow.png" alt="Back Arrow" style="width:24px; height:24px;">
+               <div class="back-btn" id="back-btn" style="width:24px; height:24px; display:flex; align-items:center; justify-content:center;">
+                <img src="arrow.png" alt="Back Arrow" style="width:25px; height:25px;">
                </div>
         </div>
         
@@ -1086,6 +1330,63 @@
         </div>
     </div>
 
+    <!-- Order Summary View (hidden by default) -->
+    <div class="order-summary-view" id="order-summary-view">
+        <!-- Header with 4 equal spaces (same as home page) -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo">LOGO</div>
+            </div>
+            
+            <!-- Empty space (space 2) -->
+            <div class="header-space"></div>
+            
+            <div class="header-buttons">
+                <div class="header-btn call-waiter"><img src="waiter.png" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> <span class="call-waiter">Call Waiter</span></div>
+                 
+                 <div class="header-btn call-waiter"><img src="table.png" alt="Table Icon" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;"> <span class="call-waiter">1418</span></div>
+            </div>
+        </header>
+
+        <!-- Back arrow in the body -->
+        <div class="back-arrow" id="back-to-menu-btn">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Menu</span>
+        </div>
+
+        <!-- Order Summary Container -->
+        <div class="order-summary-container">
+            <div class="order-items" id="order-items">
+                <!-- Order items will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Phone Input Section (placed right after order summary) -->
+        <div class="phone-input-section">
+            <div class="phone-input-title">Phone Number *</div>
+            <div class="phone-input-container" id="phone-input-container">
+                <i class="fas fa-phone" style="color: #6b8e23;"></i>
+                <input type="tel" placeholder="Enter your phone number" id="phone-input" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            </div>
+        </div>
+
+        <!-- Payment Footer -->
+        <div class="payment-footer">
+            <div class="payment-options">
+                <div class="payment-method-selector">
+                    <div class="payment-method-label">PAY <span>using</span></div>
+                    <button class="payment-toggle">^</button>
+                </div>
+                <div class="payment-option">
+                    <img src="google-pay.png" alt="Google Pay"> Google Pay
+                </div>
+            </div>
+            <div class="pay-button-container">
+                <button class="pay-button" id="pay-button">Pay ₹0</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Sample food data
         const foodItems = [
@@ -1109,7 +1410,7 @@
                 id: 3, 
                 name: "Veg Pasta", 
                 price: 160, 
-                image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGFzdGElMjB2ZWd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60", 
+                image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGFzdGElMjB2ZGd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60", 
                 type: "veg",
                 description: "Penne pasta tossed in a rich tomato sauce with fresh vegetables and herbs."
             },
@@ -1147,12 +1448,16 @@
         let detailQuantity = 1;
 
         // DOM Elements
+        const mainView = document.getElementById('main-view');
+        const orderSummaryView = document.getElementById('order-summary-view');
         const menuGrid = document.getElementById('menu-grid');
+        const orderItems = document.getElementById('order-items');
         const searchInput = document.getElementById('search-input');
         const filterButtons = document.querySelectorAll('.filter-btn');
         const cartCount = document.getElementById('cart-count');
         const cartSummary = document.getElementById('cart-summary');
-        const viewCartBtn = document.querySelector('.view-cart-btn');
+        const viewCartBtn = document.getElementById('view-cart-btn');
+        const backToMenuBtn = document.getElementById('back-to-menu-btn');
         const foodDetail = document.getElementById('food-detail');
         const backBtn = document.getElementById('back-btn');
         const detailImage = document.getElementById('detail-image');
@@ -1167,6 +1472,9 @@
         const detailType = document.getElementById('detail-type');
         const overlay = document.getElementById('overlay');
         const filterCloses = document.querySelectorAll('.filter-close');
+        const payButton = document.getElementById('pay-button');
+        const phoneInput = document.getElementById('phone-input');
+        const phoneInputContainer = document.getElementById('phone-input-container');
 
         // Initialize the page
         function init() {
@@ -1229,6 +1537,52 @@
             attachMenuEventListeners();
         }
 
+        // Render order items
+        function renderOrderItems() {
+            orderItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                orderItems.innerHTML = '<div class="empty-state">No items in your order</div>';
+                payButton.textContent = 'Pay ₹0';
+                return;
+            }
+            
+            cart.forEach(item => {
+                const orderItemElement = document.createElement('div');
+                orderItemElement.classList.add('order-item');
+                orderItemElement.dataset.id = item.id;
+                
+                orderItemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="order-item-image">
+                    <div class="order-item-details">
+                        <div class="order-item-type">
+                            <div class="food-type ${item.type}-type">
+                                <div class="type-indicator"></div>
+                                <div class="type-dot"></div>
+                            </div>
+                        </div>
+                        <div class="order-item-name">${item.name}</div>
+                        <div class="order-item-controls">
+                            <div class="order-quantity-controls" data-id="${item.id}">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-value">${item.quantity}</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                        </div>
+                        <div class="order-item-price">₹${item.price * item.quantity}</div>
+                    </div>
+                `;
+                
+                orderItems.appendChild(orderItemElement);
+            });
+            
+            // Update total amount in pay button
+            payButton.textContent = `Pay ₹${calculateTotal()}`;
+            
+            // Attach event listeners to order item controls
+            attachOrderItemEventListeners();
+        }
+
         function setupEventListeners() {
             searchInput.addEventListener('input', function() {
                 searchTerm = this.value;
@@ -1260,7 +1614,11 @@
             });
             
             viewCartBtn.addEventListener('click', function() {
-                alert(`Your cart has ${cart.reduce((sum, item) => sum + item.quantity, 0)} items. Total: ₹${calculateTotal()}`);
+                showOrderSummary();
+            });
+            
+            backToMenuBtn.addEventListener('click', function() {
+                showMainView();
             });
             
             backBtn.addEventListener('click', function() {
@@ -1296,6 +1654,38 @@
                 // Refresh the menu items to reflect any changes
                 renderFoodItems(foodItems);
             });
+            
+            payButton.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty. Add some items before proceeding to payment.');
+                    return;
+                }
+                
+                if (!validatePhoneNumber()) {
+                    alert('Please enter a valid 10-digit phone number.');
+                    return;
+                }
+                
+                alert(`Payment successful! Total: ₹${calculateTotal()}. You will receive a confirmation on ${phoneInput.value}`);
+            });
+            
+            // Phone number validation
+            phoneInput.addEventListener('input', function() {
+                validatePhoneNumber();
+            });
+        }
+        
+        function validatePhoneNumber() {
+            const phoneNumber = phoneInput.value;
+            const isValid = /^\d{10}$/.test(phoneNumber);
+            
+            if (phoneNumber && !isValid) {
+                phoneInputContainer.classList.add('invalid');
+                return false;
+            } else {
+                phoneInputContainer.classList.remove('invalid');
+                return true;
+            }
         }
         
         function attachMenuEventListeners() {
@@ -1339,6 +1729,31 @@
                 item.addEventListener('click', function() {
                     const itemId = parseInt(this.dataset.id);
                     showFoodDetail(itemId);
+                });
+            });
+        }
+        
+        function attachOrderItemEventListeners() {
+            // Quantity control listeners in order view
+            const minusButtons = document.querySelectorAll('.order-item .minus-btn');
+            minusButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const control = this.parentElement;
+                    const itemId = parseInt(control.dataset.id);
+                    decrementCartItem(itemId);
+                    e.stopPropagation();
+                    updateOrderView();
+                });
+            });
+            
+            const plusButtons = document.querySelectorAll('.order-item .plus-btn');
+            plusButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const control = this.parentElement;
+                    const itemId = parseInt(control.dataset.id);
+                    incrementCartItem(itemId);
+                    e.stopPropagation();
+                    updateOrderView();
                 });
             });
         }
@@ -1446,6 +1861,23 @@
             overlay.classList.remove('active');
             foodDetail.classList.remove('active');
             document.body.style.overflow = 'auto';
+        }
+        
+        function showOrderSummary() {
+            mainView.style.display = 'none';
+            orderSummaryView.style.display = 'flex';
+            renderOrderItems();
+        }
+        
+        function showMainView() {
+            orderSummaryView.style.display = 'none';
+            mainView.style.display = 'block';
+            renderFoodItems(foodItems);
+        }
+        
+        function updateOrderView() {
+            renderOrderItems();
+            updateCartUI();
         }
         
         function addToCart(itemId, quantity) {
